@@ -22,9 +22,12 @@
         @guest
           <li><a href="{{ route('login') }}">Login</a></li>
         @else
-          <li><a href="{{ route('logout') }}">Logout</a></li>
+          <li><a href="{{ route('logout') }}">Logout {{ Auth::user()->username }}</a></li>
         @endguest
-        <li><a href="{{ route('admin.index') }}">Administration</a></li>
+
+        @if(Auth::user()->hasRole('manager'))
+          <li><a href="{{ route('admin.index') }}">Admin</a></li>
+        @endif
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
@@ -35,12 +38,16 @@
         <li>
           <div class="divider"></div>
         </li>
+
         @guest
           <li><a href="{{ route('login') }}">Login</a></li>
         @else
-          <li><a href="{{ route('logout') }}">Logout</a></li>
+          <li><a href="{{ route('logout') }}">Logout {{ Auth::user()->username }}</a></li>
         @endguest
-        <li><a href="{{ route('admin.index') }}">Administration</a></li>
+
+        @if(Auth::user()->hasRole('manager'))
+          <li><a href="{{ route('admin.index') }}">Admin</a></li>
+        @endif
       </ul>
 
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>

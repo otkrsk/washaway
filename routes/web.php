@@ -42,7 +42,8 @@ Route::get('/appointment', 'HomeController@appointment')->name('appointment');
 
 Route::resource('cars', 'CarController');
 
-Route::prefix('admin')->group(function() {
+// Route::prefix('admin')->group(function() {
+Route::group(['prefix' => 'admin'], function() {
     Route::get('/index', 'AdminController@showMenuItems')->name('admin.index');
     Route::get('/edit/menu', 'AdminController@editMenuInfo')->name('admin.editmenu');
     Route::get('/edit/carinfo', 'AdminController@editCarInfo')->name('admin.editcarinfo');
