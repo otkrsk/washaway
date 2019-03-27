@@ -25,9 +25,9 @@
           <li><a href="{{ route('logout') }}">Logout {{ Auth::user()->username }}</a></li>
         @endguest
 
-        @if(Auth::user()->hasRole('manager'))
+        @can('edit_forum')
           <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        @endif
+        @endcan
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
@@ -45,9 +45,9 @@
           <li><a href="{{ route('logout') }}">Logout {{ Auth::user()->username }}</a></li>
         @endguest
 
-        @if(Auth::user()->hasRole('manager'))
+        @can('edit_forum')
           <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        @endif
+        @endcan
       </ul>
 
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
