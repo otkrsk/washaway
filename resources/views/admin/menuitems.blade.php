@@ -28,6 +28,12 @@
   </div>
 </a>
 <div class="divider"></div>
+<a href="{{ route('admin.editmembers') }}">
+  <div class="section">
+    <h5>Manage Members</h5>
+  </div>
+</a>
+<div class="divider"></div>
 <a href="{{ route('admin.searchtransaction') }}">
   <div class="section">
     <h5>Search Transaction to Edit/Remove</h5>

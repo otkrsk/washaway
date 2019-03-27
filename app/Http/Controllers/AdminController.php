@@ -119,6 +119,19 @@ class AdminController extends Controller
         return view('admin.editfreeunclaimed', compact('unclaimedServices'));
     }
 
+    public function editMembers()
+    {
+        $members = [
+            'Wash & Vacuum',
+            'Premium Wash',
+            '12 Step Meguair',
+            '16 Step Meguair',
+            'Nano Carnauba Wash',
+            'Nano Crystal Coat'
+        ];
+        return view('admin.editmembers', compact('members'));
+    }
+
     public function searchTransaction()
     {
         return view('admin.searchtransaction');

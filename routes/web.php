@@ -48,6 +48,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/edit/carinfo', 'AdminController@editCarInfo')->name('admin.editcarinfo');
     Route::get('/edit/payment', 'AdminController@editPaymentType')->name('admin.editpayment');
     Route::get('/edit/unclaimed', 'AdminController@editUnclaimed')->name('admin.editunclaimed');
+    Route::get('/edit/members', 'AdminController@editMembers')->name('admin.editmembers');
     Route::get('/edit/unclaimed/free', 'AdminController@editFreeUnclaimed')->name('admin.editfreeunclaimed');
     Route::get('/transaction/search', 'AdminController@searchTransaction')->name('admin.searchtransaction');
     // Route::get('/administration', 'HomeController@administration')->name('administration');
