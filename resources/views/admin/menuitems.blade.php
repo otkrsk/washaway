@@ -6,25 +6,25 @@
 <div class="divider"></div>
 <a href="{{ route('admin.editmenu') }}">
   <div class="section">
-    <h5>Add/Edit/Remove Menu Information</h5>
+    <h5>Manage Menu Information</h5>
   </div>
 </a>
 <div class="divider"></div>
 <a href="{{ route('admin.editcarinfo') }}">
   <div class="section">
-    <h5>Add/Edit/Remove Car Information</h5>
+    <h5>Manage Car Information</h5>
   </div>
 </a>
 <div class="divider"></div>
 <a href="{{ route('admin.editpayment') }}">
   <div class="section">
-    <h5>Add/Edit/Remove Payment Type</h5>
+    <h5>Manage Payment Type</h5>
   </div>
 </a>
 <div class="divider"></div>
 <a href="{{ route('admin.editunclaimed') }}">
   <div class="section">
-    <h5>Add/Edit/Remove Unclaimed Service Attach to Plate No</h5>
+    <h5>Manage Unclaimed Service Attach to Plate No</h5>
   </div>
 </a>
 <div class="divider"></div>

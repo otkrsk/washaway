@@ -19,12 +19,12 @@
         <li><a href="{{ route('member') }}">Member</a></li>
         <li><a href="{{ route('report') }}">Report</a></li>
         <li><a href="{{ route('appointment') }}">Appointment</a></li>
-        <li><a href="{{ route('admin.index') }}">Administration</a></li>
         @guest
           <li><a href="{{ route('login') }}">Login</a></li>
         @else
           <li><a href="{{ route('logout') }}">Logout</a></li>
         @endguest
+        <li><a href="{{ route('admin.index') }}">Administration</a></li>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
@@ -32,13 +32,17 @@
         <li><a href="{{ route('member') }}">Member</a></li>
         <li><a href="{{ route('report') }}">Report</a></li>
         <li><a href="{{ route('appointment') }}">Appointment</a></li>
-        <li><a href="{{ route('admin.index') }}">Administration</a></li>
+        <li>
+          <div class="divider"></div>
+        </li>
         @guest
           <li><a href="{{ route('login') }}">Login</a></li>
         @else
           <li><a href="{{ route('logout') }}">Logout</a></li>
         @endguest
+        <li><a href="{{ route('admin.index') }}">Administration</a></li>
       </ul>
+
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>

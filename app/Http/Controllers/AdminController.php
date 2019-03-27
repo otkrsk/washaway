@@ -37,8 +37,7 @@ class AdminController extends Controller
             'Sales',
             'Member',
             'Report',
-            'Appointment',
-            'Administration'
+            'Appointment'
         ];
 
         return view('admin.editmenuinfo', compact('menuItems'));
