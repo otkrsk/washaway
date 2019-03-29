@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Car;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -54,37 +55,40 @@ class AdminController extends Controller
 
     public function editCarInfo()
     {
-        $carArray = [
-            [
-                'brand' => 'Honda',
-                'model' => 'Civic',
-                'color' => 'Black',
-            ],
-            [
-                'brand' => 'Toyota',
-                'model' => 'Prius',
-                'color' => 'Silver',
-            ],
-            [
-                'brand' => 'Nissan',
-                'model' => 'Almera',
-                'color' => 'Red',
-            ],
-            [
-                'brand' => 'Proton',
-                'model' => 'Exora',
-                'color' => 'Red',
-            ],
-            [
-                'brand' => 'Ford',
-                'model' => 'Focus',
-                'color' => 'Blue',
-            ]
-        ];
+        // $carArray = [
+        //     [
+        //         'brand' => 'Honda',
+        //         'model' => 'Civic',
+        //         'color' => 'Black',
+        //     ],
+        //     [
+        //         'brand' => 'Toyota',
+        //         'model' => 'Prius',
+        //         'color' => 'Silver',
+        //     ],
+        //     [
+        //         'brand' => 'Nissan',
+        //         'model' => 'Almera',
+        //         'color' => 'Red',
+        //     ],
+        //     [
+        //         'brand' => 'Proton',
+        //         'model' => 'Exora',
+        //         'color' => 'Red',
+        //     ],
+        //     [
+        //         'brand' => 'Ford',
+        //         'model' => 'Focus',
+        //         'color' => 'Blue',
+        //     ]
+        // ];
 
-        $carInfo = (object) $carArray;
+        $carArray = Car::get();
+        // dd($carArray);
 
-        return view('admin.editcarinfo', compact('carInfo'));
+        // $carInfo = (object) $carArray;
+
+        return view('admin.editcarinfo', compact('carArray'));
     }
 
     public function editPaymentType()

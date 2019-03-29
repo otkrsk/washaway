@@ -35,7 +35,16 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->request);
+
+        $car = Car::create([
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'color' => $request->color
+        ]);
+
+        return redirect()->route('admin.editcarinfo');
+
     }
 
     /**
@@ -70,6 +79,15 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         //
+    }
+
+    public function delete(Car $car)
+    {
+        // dd($car->id);
+        // $car = Car::find($car);
+        Car::destroy($car->id);
+
+        return redirect()->route('admin.editcarinfo');
     }
 
     /**

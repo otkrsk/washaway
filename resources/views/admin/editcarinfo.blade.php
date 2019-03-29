@@ -16,19 +16,17 @@
     <tr>
       <th>Brand</th>
       <th>Model</th>
-      <th>Colour</th>
-      <th colspan=2>Status</th>
+      <th colspan=2>Colour</th>
     </tr>
   </thead>
 
   <tbody>
-    @foreach($carInfo as $key => $value)
+    @foreach($carArray as $car)
       <tr>
-        <td>{{ $value['brand'] }}</td>
-        <td>{{ $value['model'] }}</td>
-        <td>{{ $value['color'] }}</td>
-        <td>Enable/Disable</td>
-        <td><a href="#">Delete</a></td>
+        <td>{{ $car->brand }}</td>
+        <td>{{ $car->model }}</td>
+        <td>{{ $car->color }}</td>
+        <td><a href="{{ route('cars.delete', ['id' => $car->id]) }}">Delete</a></td>
       </tr>
     @endforeach
   </tbody>

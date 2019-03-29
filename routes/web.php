@@ -40,6 +40,7 @@ Route::get('/member', 'HomeController@member')->name('member');
 Route::get('/report', 'HomeController@report')->name('report');
 Route::get('/appointment', 'HomeController@appointment')->name('appointment');
 
+Route::get('/cars/delete/{car}', 'CarController@delete')->name('cars.delete');
 Route::resource('cars', 'CarController');
 Route::resource('users', 'UserController');
 
