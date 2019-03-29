@@ -15,6 +15,12 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if($request->user() && $request->user()->hasRole('manager'))
+        {
+            return $next($request);
+        }
+
+        abort(403, 'Unauthorized action');
+
     }
 }
