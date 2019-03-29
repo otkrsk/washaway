@@ -25,7 +25,7 @@
           <li><a href="{{ route('logout') }}">Logout {{ Auth::user()->username }}</a></li>
         @endguest
 
-        @can('edit_forum')
+        @can('manage_site')
           <li><a href="{{ route('admin.index') }}">Admin</a></li>
         @endcan
       </ul>
@@ -45,7 +45,7 @@
           <li><a href="{{ route('logout') }}">Logout {{ Auth::user()->username }}</a></li>
         @endguest
 
-        @can('edit_forum')
+        @can('manage_site')
           <li><a href="{{ route('admin.index') }}">Admin</a></li>
         @endcan
       </ul>

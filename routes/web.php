@@ -41,6 +41,7 @@ Route::get('/report', 'HomeController@report')->name('report');
 Route::get('/appointment', 'HomeController@appointment')->name('appointment');
 
 Route::resource('cars', 'CarController');
+Route::resource('users', 'UserController');
 
 // Route::prefix('admin')->group(function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {

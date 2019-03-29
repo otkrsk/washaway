@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -40,11 +41,7 @@ class AdminController extends Controller
 
     public function updateMenuInfo(Request $request)
     {
-        // dd(array_keys($request->cb));
         $keys = array_keys($request->cb);
-
-        // $yesYes = DB::table('menu_items')->whereIn('id', $keys)->get();
-        // $noNo = DB::table('menu_items')->whereNotIn('id', $keys)->get();
 
         DB::table('menu_items')->whereIn('id', $keys)
             ->update(['status' => true]);
@@ -52,14 +49,6 @@ class AdminController extends Controller
         DB::table('menu_items')->whereNotIn('id', $keys)
             ->update(['status' => false]);
 
-        // foreach($yesYes as $yes)
-        // {
-        //     dd($yes);
-        //     $yes->status = true;
-        //     $yes->update(['status' => true]);
-        // }
-
-        // dd('watcha');
         return redirect()->route('admin.editmenu');
     }
 
@@ -141,15 +130,18 @@ class AdminController extends Controller
 
     public function editMembers()
     {
-        $members = [
-            'Wash & Vacuum',
-            'Premium Wash',
-            '12 Step Meguair',
-            '16 Step Meguair',
-            'Nano Carnauba Wash',
-            'Nano Crystal Coat'
-        ];
-        return view('admin.editmembers', compact('members'));
+        $admin = User::whereHas('roles', function($query) {
+            $query->where('id',1);
+        })->get();
+
+        $members = User::whereHas('roles', function($query) {
+            $query->where('id',2);
+        })->get();
+
+        // dd($admin);
+        // dd($members);
+
+        return view('admin.editmembers', compact('admin','members'));
     }
 
     public function editBranches()

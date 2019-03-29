@@ -30,7 +30,7 @@
 <div class="divider"></div>
 <a href="{{ route('admin.editmembers') }}">
   <div class="section">
-    <h5>Manage Members</h5>
+    <h5>Manage Users</h5>
   </div>
 </a>
 <div class="divider"></div>
