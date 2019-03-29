@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Car;
+use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -55,51 +56,14 @@ class AdminController extends Controller
 
     public function editCarInfo()
     {
-        // $carArray = [
-        //     [
-        //         'brand' => 'Honda',
-        //         'model' => 'Civic',
-        //         'color' => 'Black',
-        //     ],
-        //     [
-        //         'brand' => 'Toyota',
-        //         'model' => 'Prius',
-        //         'color' => 'Silver',
-        //     ],
-        //     [
-        //         'brand' => 'Nissan',
-        //         'model' => 'Almera',
-        //         'color' => 'Red',
-        //     ],
-        //     [
-        //         'brand' => 'Proton',
-        //         'model' => 'Exora',
-        //         'color' => 'Red',
-        //     ],
-        //     [
-        //         'brand' => 'Ford',
-        //         'model' => 'Focus',
-        //         'color' => 'Blue',
-        //     ]
-        // ];
-
         $carArray = Car::get();
-        // dd($carArray);
-
-        // $carInfo = (object) $carArray;
 
         return view('admin.editcarinfo', compact('carArray'));
     }
 
     public function editPaymentType()
     {
-        $paymentTypes = [
-            'Cash',
-            'Credit Card',
-            'Boost',
-            'TNG',
-            'Washaway Credit'
-        ];
+        $paymentTypes = Payment::get();
 
         return view('admin.editpaymenttype', compact('paymentTypes'));
     }

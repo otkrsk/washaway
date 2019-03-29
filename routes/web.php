@@ -43,18 +43,28 @@ Route::get('/appointment', 'HomeController@appointment')->name('appointment');
 Route::get('/cars/delete/{car}', 'CarController@delete')->name('cars.delete');
 Route::resource('cars', 'CarController');
 Route::resource('users', 'UserController');
+Route::get('/payments/delete/{payment}', 'PaymentController@delete')->name('payments.delete');
+Route::resource('payments', 'PaymentController');
 
 // Route::prefix('admin')->group(function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
     Route::get('/index', 'AdminController@showMenuItems')->name('admin.index');
+
     Route::get('/edit/menu', 'AdminController@editMenuInfo')->name('admin.editmenu');
     Route::post('/update/menu', 'AdminController@updateMenuInfo')->name('admin.updatemenu');
+
     Route::get('/edit/carinfo', 'AdminController@editCarInfo')->name('admin.editcarinfo');
+
     Route::get('/edit/payment', 'AdminController@editPaymentType')->name('admin.editpayment');
+    Route::get('/add/payment', 'AdminController@addPaymentType')->name('admin.addpayment');
+    Route::post('/store/payment', 'AdminController@storePaymentType')->name('admin.storepayment');
+
     Route::get('/edit/unclaimed', 'AdminController@editUnclaimed')->name('admin.editunclaimed');
+    Route::get('/edit/unclaimed/free', 'AdminController@editFreeUnclaimed')->name('admin.editfreeunclaimed');
+
     Route::get('/edit/members', 'AdminController@editMembers')->name('admin.editmembers');
     Route::get('/edit/branches', 'AdminController@editBranches')->name('admin.editbranches');
-    Route::get('/edit/unclaimed/free', 'AdminController@editFreeUnclaimed')->name('admin.editfreeunclaimed');
+
     Route::get('/transaction/search', 'AdminController@searchTransaction')->name('admin.searchtransaction');
     // Route::get('/administration', 'HomeController@administration')->name('administration');
     // Route::get('/menuitems', 'AdminController@showMenuItems')->name('menuitems');
