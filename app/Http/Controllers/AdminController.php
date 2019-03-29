@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -33,14 +34,33 @@ class AdminController extends Controller
      */
     public function editMenuInfo()
     {
-        $menuItems = [
-            'Sales',
-            'Member',
-            'Report',
-            'Appointment'
-        ];
-
+        $menuItems = DB::table('menu_items')->get();
         return view('admin.editmenuinfo', compact('menuItems'));
+    }
+
+    public function updateMenuInfo(Request $request)
+    {
+        // dd(array_keys($request->cb));
+        $keys = array_keys($request->cb);
+
+        // $yesYes = DB::table('menu_items')->whereIn('id', $keys)->get();
+        // $noNo = DB::table('menu_items')->whereNotIn('id', $keys)->get();
+
+        DB::table('menu_items')->whereIn('id', $keys)
+            ->update(['status' => true]);
+
+        DB::table('menu_items')->whereNotIn('id', $keys)
+            ->update(['status' => false]);
+
+        // foreach($yesYes as $yes)
+        // {
+        //     dd($yes);
+        //     $yes->status = true;
+        //     $yes->update(['status' => true]);
+        // }
+
+        // dd('watcha');
+        return redirect()->route('admin.editmenu');
     }
 
     public function editCarInfo()
@@ -130,6 +150,16 @@ class AdminController extends Controller
             'Nano Crystal Coat'
         ];
         return view('admin.editmembers', compact('members'));
+    }
+
+    public function editBranches()
+    {
+        $branches = [
+            'Puchong',
+            'Sunway Mentari',
+            'Cheras'
+        ];
+        return view('admin.editbranches', compact('branches'));
     }
 
     public function searchTransaction()

@@ -34,6 +34,12 @@
   </div>
 </a>
 <div class="divider"></div>
+<a href="{{ route('admin.editbranches') }}">
+  <div class="section">
+    <h5>Manage Branches</h5>
+  </div>
+</a>
+<div class="divider"></div>
 <a href="{{ route('admin.searchtransaction') }}">
   <div class="section">
     <h5>Search Transaction to Edit/Remove</h5>

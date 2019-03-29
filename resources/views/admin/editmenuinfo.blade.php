@@ -3,7 +3,7 @@
 @section('content')
 <h3>Edit Menu Information</h3>
 
-<form class="col s12" action="post_capture.php" method="POST">
+{!! Form::open(['route' => 'admin.updatemenu', 'class' => 'col s12']) !!}
 
   <div class="row">
     <table>
@@ -15,14 +15,14 @@
       </thead>
 
       <tbody>
-        @foreach($menuItems as $menu)
+        @foreach($menuItems as $key => $value)
           <tr>
-            <td>{{ $menu }}</td>
+            <td>{{ $value->menu_item }}</td>
             <td>
               <div class="switch">
                 <label>
                   Off
-                  <input type="checkbox" name="checkbox01">
+                  <input type="checkbox" name="cb[{{ $value->id }}]" data-status="{{ $value->status }}">
                   <span class="lever"></span>
                   On
                 </label>
@@ -36,6 +36,6 @@
   </div>
 
   <button type="submit" name="submit" class="waves-effect waves-light btn-large">Save Changes</button>
-</form>
+{!! Form::close() !!}
 
 @endsection
