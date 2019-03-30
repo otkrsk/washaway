@@ -73,7 +73,9 @@
   <script>
     $(document).ready(function(){
       $('.collapsible').collapsible();
+      $('select').formSelect();
     });
+
   </script>
 
 </body>

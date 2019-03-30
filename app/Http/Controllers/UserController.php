@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -22,9 +24,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // dd($request->request);
+
+        $branches = Branch::pluck('name','id')->toArray();
+        // dd($branches);
+
+        return view('users.create', compact('branches'));
     }
 
     /**
@@ -35,7 +42,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $role = Role::find($request->role_id);
+
+        $user = User::create([
+            'name' => 'Dick',
+            'username' => 'walla',
+            'email' => 'walla@bingbang.com',
+            'email_verified_at' => date('Y-m-d H:i:s'),
+            'password' => bcrypt('secret')
+        ]);
+
+        $user->roles()->save($role);
+
+        return redirect()->route('admin.editmembers');
     }
 
     /**
@@ -47,7 +67,6 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user = User::find($user)->first();
-        // dd($user);
         return view('users.show', compact('user'));
     }
 

@@ -24,7 +24,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        //
+        return view('branches.create');
     }
 
     /**
@@ -35,7 +35,9 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $branch = $request->branch;
+        Branch::create(['name' => $branch]);
+        return redirect()->route('admin.editbranches');
     }
 
     /**
@@ -70,6 +72,15 @@ class BranchController extends Controller
     public function update(Request $request, Branch $branch)
     {
         //
+    }
+
+    public function delete(Branch $branch)
+    {
+        // dd($car->id);
+        // $car = Branch::find($car);
+        Branch::destroy($branch->id);
+
+        return redirect()->route('admin.editbranches');
     }
 
     /**

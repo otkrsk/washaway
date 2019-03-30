@@ -40,13 +40,18 @@ Route::get('/member', 'HomeController@member')->name('member');
 Route::get('/report', 'HomeController@report')->name('report');
 Route::get('/appointment', 'HomeController@appointment')->name('appointment');
 
+Route::get('/users/create/{role_id}', 'UserController@create')->name('users.create');
+Route::resource('users', 'UserController');
+
 Route::get('/cars/delete/{car}', 'CarController@delete')->name('cars.delete');
 Route::resource('cars', 'CarController');
-Route::resource('users', 'UserController');
+
 Route::get('/payments/delete/{payment}', 'PaymentController@delete')->name('payments.delete');
 Route::resource('payments', 'PaymentController');
 
-// Route::prefix('admin')->group(function() {
+Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');
+Route::resource('branches', 'BranchController');
+
 Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
     Route::get('/index', 'AdminController@showMenuItems')->name('admin.index');
 
@@ -66,6 +71,4 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
     Route::get('/edit/branches', 'AdminController@editBranches')->name('admin.editbranches');
 
     Route::get('/transaction/search', 'AdminController@searchTransaction')->name('admin.searchtransaction');
-    // Route::get('/administration', 'HomeController@administration')->name('administration');
-    // Route::get('/menuitems', 'AdminController@showMenuItems')->name('menuitems');
 });

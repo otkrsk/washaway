@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Branch;
 use App\Car;
 use App\Payment;
 use App\User;
@@ -102,23 +103,16 @@ class AdminController extends Controller
             $query->where('id',1);
         })->get();
 
-        $members = User::whereHas('roles', function($query) {
+        $staff = User::whereHas('roles', function($query) {
             $query->where('id',2);
         })->get();
 
-        // dd($admin);
-        // dd($members);
-
-        return view('admin.editmembers', compact('admin','members'));
+        return view('admin.editmembers', compact('admin','staff'));
     }
 
     public function editBranches()
     {
-        $branches = [
-            'Puchong',
-            'Sunway Mentari',
-            'Cheras'
-        ];
+        $branches = Branch::get();
         return view('admin.editbranches', compact('branches'));
     }
 
