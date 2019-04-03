@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if($request->user() && $request->user()->hasRole('manager'))
+        if($request->user() && $request->user()->hasRole('manage_site'))
         {
             return $next($request);
         }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MenuitemsTableSeeder extends Seeder
+class MenuItemsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,35 +16,17 @@ class MenuitemsTableSeeder extends Seeder
         DB::table('menu_items')->truncate();
 
         DB::table('menu_items')->insert([
-            'menu_item' => 'Sales',
-            'url' => 'home',
-            'status' => true,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'menu_id' => 1,
+            'name' => 'Super Car Wash'
         ]);
 
-        DB::table('menu_items')->insert([
-            'menu_item' => 'Member',
-            'url' => 'member',
-            'status' => true,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        DB::table('prices')->truncate();
 
-        DB::table('menu_items')->insert([
-            'menu_item' => 'Report',
-            'url' => 'report',
-            'status' => true,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('menu_items')->insert([
-            'menu_item' => 'Appointment',
-            'url' => 'appointment',
-            'status' => true,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+        DB::table('prices')->insert([
+            'menu_item_id' => 1,
+            'car_type' => 1,
+            'normal_price' => 8,
+            'member_price' => 6
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

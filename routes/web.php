@@ -92,6 +92,7 @@ Route::resource('payments', 'PaymentController');
 
 Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');
 Route::resource('branches', 'BranchController');
+Route::resource('menus', 'MenuController');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
     Route::get('/index', 'AdminController@showMenuItems')->name('admin.index');

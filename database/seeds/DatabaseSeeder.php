@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CarcolorsTableSeeder::class);
         $this->call(CarmodelsTableSeeder::class);
         $this->call(CartypesTableSeeder::class);
-        $this->call(MenuitemsTableSeeder::class);
+        $this->call(CustomercarsTableSeeder::class);
+        $this->call(CustomersTableSeeder::class);
+        $this->call(MenuItemsTableSeeder::class);
+        $this->call(MenusTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }

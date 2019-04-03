@@ -1,41 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<h3>Edit Menu Information</h3>
+<h3>Menus</h3>
 
-{!! Form::open(['route' => 'admin.updatemenu', 'class' => 'col s12']) !!}
+<div class="row">
+  <a href="{{ route('menus.create') }}">Create New</a>
+</div>
 
-  <div class="row">
-    <table>
-      <thead>
+<div class="row">
+  <table>
+    <thead>
+      <tr>
+        <th>Menu Item</th>
+        <th>Branch</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @foreach($menus as $menu)
         <tr>
-          <th>Menu Item</th>
-          <th>Status</th>
+          <td><a href="{{ route('menus.show', ['id' => $menu->id]) }}">{{ $menu->name }}</a></td>
+          <td>{{ $menu->branches->first()->name }}</td>
         </tr>
-      </thead>
-
-      <tbody>
-        @foreach($menuItems as $key => $value)
-          <tr>
-            <td>{{ $value->menu_item }}</td>
-            <td>
-              <div class="switch">
-                <label>
-                  Off
-                  <input type="checkbox" name="cb[{{ $value->id }}]" data-status="{{ $value->status }}">
-                  <span class="lever"></span>
-                  On
-                </label>
-              </div>
-            </td>
-
-          </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-
-  <button type="submit" name="submit" class="waves-effect waves-light btn-large">Save Changes</button>
-{!! Form::close() !!}
+      @endforeach
+    </tbody>
+  </table>
+</div>
 
 @endsection

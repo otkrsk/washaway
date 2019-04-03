@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use App\Branch;
 use App\Car;
+use App\Menu;
+use App\MenuItem;
 use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
@@ -38,8 +40,11 @@ class AdminController extends Controller
      */
     public function editMenuInfo()
     {
-        $menuItems = DB::table('menu_items')->get();
-        return view('admin.editmenuinfo', compact('menuItems'));
+        // $menuItems = DB::table('menu_items')->get();
+        $menu_items = MenuItem::get();
+        $menus = Menu::get();
+        // dd($menus->first()->branches);
+        return view('admin.editmenuinfo', compact('menus','menu_items'));
     }
 
     public function updateMenuInfo(Request $request)
