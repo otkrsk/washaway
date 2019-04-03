@@ -5,35 +5,21 @@
 
 <ul class="collapsible">
   <li>
-    <div class="collapsible-header"><i class="material-icons">add</i>New</div>
+    <div class="collapsible-header"><i class="material-icons">date_range</i>Daily</div>
     <div class="collapsible-body">
       <span>Daily</span>
-
-      <form class="col s12">
-
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="amount" type="text" class="validate">
-            <label for="amount">RM</label>
-          </div>
-        </div>
-
-        <button type="submit" name="open_sales" class="waves-effect waves-light btn-large">Open Today Sales
-          <i class="material-icons right">keyboard_arrow_right</i>
-        </button>
-
-      </form>
-
     </div>
 
   </li>
+
   <li>
-    <div class="collapsible-header"><i class="material-icons">attach_money</i>Monthly</div>
-    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    <div class="collapsible-header"><i class="material-icons">date_range</i>Monthly</div>
+    <div class="collapsible-body"><span>&nbsp;</span></div>
   </li>
+
   <li>
-    <div class="collapsible-header"><i class="material-icons">attach_money</i>Custom</div>
-    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    <div class="collapsible-header"><i class="material-icons">date_range</i>Custom</div>
+    <div class="collapsible-body"><span>&nbsp;</span></div>
   </li>
 </ul>
 

@@ -5,7 +5,7 @@
 
 <ul class="collapsible">
   <li>
-    <div class="collapsible-header"><i class="material-icons">add</i>New</div>
+    <div class="collapsible-header"><i class="material-icons">search</i>Member Search</div>
     <div class="collapsible-body">
       <span>Member Search</span>
 
@@ -14,11 +14,11 @@
         <div class="row">
           <div class="input-field col s12">
             <input id="amount" type="text" class="validate">
-            <label for="amount">RM</label>
+            <label for="amount">Enter Search Query</label>
           </div>
         </div>
 
-        <button type="submit" name="open_sales" class="waves-effect waves-light btn-large">Open Today Sales
+        <button type="submit" name="open_sales" class="waves-effect waves-light btn-large">Search
           <i class="material-icons right">keyboard_arrow_right</i>
         </button>
 
@@ -28,8 +28,8 @@
 
   </li>
   <li>
-    <div class="collapsible-header"><i class="material-icons">attach_money</i>Unclaimed Services</div>
-    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    <div class="collapsible-header"><i class="material-icons">cancel</i>Unclaimed Services</div>
+    <div class="collapsible-body"><span>&nbsp;</span></div>
   </li>
 </ul>
 

@@ -5,6 +5,7 @@
 
 {!! Form::open(['route' => 'users.store', 'class' => 'col s12']) !!}
 
+  <input id="rid" name="rid" type="hidden" value="{{ $_GET['role_id'] }}">
   <div class="row">
     <div class="input-field col s12">
       <input id="username" name="username" type="text">
@@ -14,7 +15,7 @@
 
   <div class="row">
     <div class="input-field col s12">
-      <select>
+      <select name="branch_id">
         <option value="" disabled selected>Choose your option</option>
 
         @foreach($branches as $key => $value)
@@ -23,13 +24,6 @@
 
       </select>
       <label>Branch</label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field col s12">
-      <input id="color" name="color" type="text">
-      <label for="color">Color</label>
     </div>
   </div>
 

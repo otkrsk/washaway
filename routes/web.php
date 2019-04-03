@@ -15,6 +15,47 @@ Route::get('/', function () {
     return redirect()->action('HomeController@index');
 });
 
+Route::get('/jsontest', function () {
+    $models = [
+        1 => [
+            'Coo',
+            'Daz',
+            'Mui',
+        ],
+        2 => [
+            'Qua',
+            'Ink',
+            'Scoop',
+        ]
+    ];
+
+    dd($models[1]);
+
+    $brands = [
+        [
+            "id" => 1,
+            "brand" => "Honda"
+        ],
+        [
+            "id" => 2,
+            "brand" => "Toyota"
+        ],
+        [
+            "id" => 3,
+            "brand" => "Nissan"
+        ],
+        [
+            "id" => 4,
+            "brand" => "Proton"
+        ]
+    ];
+
+    $contents = Storage::get('public/brands.json');
+    $contents = json_decode($contents);
+    // dd($contents);
+    return view('jsontest',compact('contents'));
+});
+
 /**
  * Custom Auth Routes
  */

@@ -29,11 +29,11 @@
   </li>
   <li>
     <div class="collapsible-header"><i class="material-icons">attach_money</i>Payment</div>
-    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    <div class="collapsible-body"><span>&nbsp;</span></div>
   </li>
   <li>
     <div class="collapsible-header"><i class="material-icons">date_range</i>Today Sales</div>
-    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    <div class="collapsible-body"><span>&nbsp;</span></div>
   </li>
 </ul>
 

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class Carbrand extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,11 +12,6 @@ class Permission extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'label'
+        'name'
     ];
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
 }
