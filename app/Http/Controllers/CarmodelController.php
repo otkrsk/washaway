@@ -82,4 +82,15 @@ class CarmodelController extends Controller
     {
         //
     }
+
+    public function ajaxcall(Request $request)
+    {
+        $value = $request->get('value');
+
+        $models = Carmodel::where('carbrand_id',$value)->select('id','name')->get();
+        // dd($models);
+
+        return json_encode($models);
+    }
+
 }

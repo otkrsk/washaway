@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // dd(\Auth::user()->branches()->first()->name);
         return view('home');
     }
 
@@ -64,5 +65,22 @@ class HomeController extends Controller
     public function administration()
     {
         return view('administration');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function newsales_stub(Request $request)
+    {
+        // dd($request->request);
+        return view('sales.create');
+    }
+
+    public function carsearch_stub(Request $request)
+    {
+        dd($request->request);
+        // return view('sales.create');
     }
 }

@@ -4,14 +4,14 @@
 <h3>Menus</h3>
 
 <div class="row">
-  <a href="{{ route('menus.create') }}">Create New</a>
+  <a href="{{ route('menus.create') }}">Create New Menu</a>
 </div>
 
 <div class="row">
   <table>
     <thead>
       <tr>
-        <th>Menu Item</th>
+        <th>Menu Name</th>
         <th>Branch</th>
       </tr>
     </thead>

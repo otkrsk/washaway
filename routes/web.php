@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->action('HomeController@index');
-});
-
 Route::get('/jsontest', function () {
     $models = [
         1 => [
@@ -56,6 +52,10 @@ Route::get('/jsontest', function () {
     return view('jsontest',compact('contents'));
 });
 
+Route::get('/', function () {
+    return redirect()->action('HomeController@index');
+});
+
 /**
  * Custom Auth Routes
  */
@@ -81,18 +81,27 @@ Route::get('/member', 'HomeController@member')->name('member');
 Route::get('/report', 'HomeController@report')->name('report');
 Route::get('/appointment', 'HomeController@appointment')->name('appointment');
 
+Route::post('/sales', 'HomeController@newsales_stub')->name('sales.stub');
+
 Route::get('/users/create/{role_id}', 'UserController@create')->name('users.create');
 Route::resource('users', 'UserController');
 
 Route::get('/cars/delete/{car}', 'CarController@delete')->name('cars.delete');
 Route::resource('cars', 'CarController');
 
+Route::post('/ajax/test', 'CarmodelController@ajaxcall')->name('ajax.test');
+Route::resource('carmodels', 'CarmodelController');
+
 Route::get('/payments/delete/{payment}', 'PaymentController@delete')->name('payments.delete');
 Route::resource('payments', 'PaymentController');
 
 Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');
 Route::resource('branches', 'BranchController');
+
 Route::resource('menus', 'MenuController');
+
+Route::post('/customers/search', 'CustomerController@search_stub')->name('customers.search');
+Route::resource('customers', 'CustomerController');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
     Route::get('/index', 'AdminController@showMenuItems')->name('admin.index');
