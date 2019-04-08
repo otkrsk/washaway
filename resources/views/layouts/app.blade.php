@@ -71,11 +71,12 @@
   <script src="{{ asset('js/scripts.js') }}"></script>
 
   <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
       $('.collapsible').collapsible();
       $('select').formSelect();
       $('.modal').modal();
 
+      // Auto-populate Car Models in Customer creation form
       $('#brand_id').change(function() {
         console.log($(this).val());
 
@@ -102,9 +103,36 @@
 
           console.log(content);
         });
-
       });
 
+      // Dynamically add div in Add New Menu form
+      $('#add_service').click(function() {
+        console.log('yougaotme');
+
+        var content = "<p>Add Service</p><div class='row'>";
+
+        content += "<div class='input-field col s12'><select class='car_type' name='car_type'>";
+
+        content += "<option value='' disabled selected>Select Service</option>";
+        content += "<option value='1'>Sedan</option>";
+        content += "<option value='2'>MPV</option>";
+        content += "<option value='3'>Sedan (Member)</option>";
+        content += "<option value='4'>MPV (Member)</option>";
+
+        content += "</select><label>Select Service</label></div>";
+
+        content += "<div class='input-field col s12'><input id='menu_item_name' name='menu_item_name' type='text' placeholder='Enter Name'><label class='active' for='menu_item_name'>Name</label></div>";
+
+        content += "<div class='input-field col s12'><input id='price' name='price' type='text' placeholder='Enter Price'><label class='active' for='price'>Price</label></div>";
+
+        content += "<div class='input-field col s12'><p><label><input type='checkbox' class='filled-in' id='unclaimed' name='unclaimed' /><span>Add to Unclaimed Services</span></label></p></div>";
+
+        content += "<a id='save_service' class='waves-effect waves-light btn'>Add</a></div>";
+
+        // $('.services').empty();
+        $('.services').append(content);
+        $('.car_type').formSelect();
+      });
     });
   </script>
 

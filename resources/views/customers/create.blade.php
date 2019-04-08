@@ -51,7 +51,7 @@
 
   <div class="row">
     <div class="input-field col s12">
-      <input id="contact_no" name="contact_no" type="text" placeholder="Enter Contact No">
+      <input id="contact_no" name="contact_no" type="text" placeholder="Enter Contact No (Optional)">
       <label for="contact_no">Contact No</label>
     </div>
   </div>
