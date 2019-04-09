@@ -17,7 +17,7 @@
       sedan_content += "<input id='sedan_service_member_price' name='sedan_service[" + i + "][member_price]' type='text' placeholder='Enter Sedan service price'><label class='active' for='sedan_service_member_price'>Service Price (Member)</label>";
       sedan_content += "</div></td>";
 
-      sedan_content += "<td><p><label><input id='sedan_service_unclaimed' name='sedan_service[" + i + "][unclaimed]' type='checkbox' /><span>Add to Unclaimed Services</span></label></p></td>";
+      sedan_content += "<td><p><label><input id='sedan_service_unclaimed' name='sedan_service[" + i + "][unclaimed]' type='checkbox' data-sedan-unclaimed='" + i + "' /><span>Add to Unclaimed Services</span></label></p></td>";
 
       sedan_content += "<td>";
       sedan_content += "<a data-sedan-identifier='" + i + "' class='sedan_remove waves-effect waves-light btn'>Remove</a>";
@@ -29,6 +29,10 @@
 
       M.updateTextFields();
 
+    });
+
+    $(document).on('click', '#sedan_service_unclaimed', function() {
+      console.log($(this).attr('data-sedan-unclaimed'));
     });
 
     $(document).on('click', '.sedan_remove', function() {

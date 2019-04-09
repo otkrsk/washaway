@@ -55,7 +55,7 @@
 
           <td>
             <label>
-                <input id='sedan_service_unclaimed' name='sedan_service[1][unclaimed]' type='checkbox' />
+                <input id='sedan_service_unclaimed' name='sedan_service[1][unclaimed]' type='checkbox' data-sedan-unclaimed='1' />
                 <span>Add to Unclaimed Services</span>
             </label>
           </td>
