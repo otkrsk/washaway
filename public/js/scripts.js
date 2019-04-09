@@ -1,4 +1,9 @@
 $(document).ready(function() {
+
+
+
+
+
   $('#brand_id').change(function() {
     console.log($(this).val());
 

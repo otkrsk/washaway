@@ -42,52 +42,57 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->request);
-
+        // dd($request->menu_name);
         $branch = Branch::find($request->branch_id);
 
-        $menu = Menu::create([
+        $menu_details = [
             'name' => $request->menu_name,
-            'branch_id' => $request->branch_id,
-        ]);
+            'branch_id' => $request->branch_id
+        ];
 
-        $menu_item = MenuItem::create([
-            'menu_id' => $menu->id,
-            'name' => $request->menu_item_name
-        ]);
+        $menu = Menu::create($menu_details);
 
-        switch($request->service) {
-            case 1:
-                $normal_price = $request->price;
-                $member_price = 0;
-                break;
-            case 2:
-                break;
-                $normal_price = $request->price;
-                $member_price = 0;
-            case 3:
-                break;
-                $normal_price = 0;
-                $member_price = $request->price;
-            case 4:
-                break;
-                $normal_price = 0;
-                $member_price = $request->price;
-            default:
-                $normal_price = 0;
-                $member_price = 0;
-                break;
+        $sedan = $request->sedan_service;
+        $mpv = $request->mpv_service;
+
+        foreach($sedan as $s_menu)
+        {
+            $menu_item = MenuItem::create([
+                'menu_id' => $menu->id,
+                'name' => $s_menu['name']
+            ]);
+
+            $menu_item->menu()->attach($menu);
+
+            $price = Price::create([
+                'menu_item_id' => $menu_item->id,
+                'car_type' => $sedan['car_type'],
+                'normal_price' => $s_menu['normal_price'],
+                'member_price' => $s_menu['member_price']
+            ]);
+
+            $price->menuitems()->attach($menu_item);
         }
 
-        $price = Price::create([
-            'menu_items_id' => $menu_item->id,
-            'car_type' => $request->car_type,
-            'normal_price' => $normal_price,
-            'member_price' => $member_price
-        ]);
+        foreach($mpv as $m_menu)
+        {
+            $menu_item = MenuItem::create([
+                'menu_id' => $menu->id,
+                'name' => $m_menu['name']
+            ]);
 
-        $price->menuitems()->attach($menu_item);
-        $menu_item->menu()->attach($menu);
+            $menu_item->menu()->attach($menu);
+
+            $price = Price::create([
+                'menu_item_id' => $menu_item->id,
+                'car_type' => $mpv['car_type'],
+                'normal_price' => $m_menu['normal_price'],
+                'member_price' => $m_menu['member_price']
+            ]);
+
+            $price->menuitems()->attach($menu_item);
+        }
+
         $menu->branches()->attach($branches);
 
         return redirect()->route('admin.editmenu');
@@ -101,7 +106,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        dd('yougadit too');
+        dd($menu);
     }
 
     /**

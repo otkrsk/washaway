@@ -69,6 +69,7 @@
   <script src="{{ asset('js/materialize.js') }}"></script>
   <script src="{{ asset('js/init.js') }}"></script>
   <script src="{{ asset('js/scripts.js') }}"></script>
+  <script src="{{ asset('js/dynamic_form.js') }}"></script>
 
   <script>
     $(document).ready(function() {
