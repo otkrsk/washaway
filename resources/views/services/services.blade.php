@@ -11,7 +11,12 @@
     TO DO: List all Services from DB
   </p>
   <p>
-    Will be calling from 2 tables. One is standard services, one will be branch specific.
+    Will be calling from 2 tables:
+    <ul>
+      <li>One is standard services</li>
+      <li>One will be branch specific</li>
+    </ul>
+    
   </p>
 </div>
 

@@ -20,5 +20,10 @@ class Price extends Model
         return $this->belongsToMany(MenuItem::class);
     }
 
+    public function car_types()
+    {
+        return $this->hasOne(Cartype::class, 'id', 'car_type');
+    }
+
 }
 

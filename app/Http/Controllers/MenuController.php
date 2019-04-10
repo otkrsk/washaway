@@ -106,7 +106,9 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        dd($menu);
+        // dd($menu);
+        $menuitems = $menu->menuitems;
+        return view('menus.show',compact('menu','menuitems'));
     }
 
     /**
