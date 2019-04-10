@@ -76,7 +76,21 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        dd($customer);
+        // dd($customer->cars->first()->brand->name);
+        $customer_car = $customer->cars->first();
+        return view('customers.show',compact('customer','customer_car'));
+    }
+
+    public function addservice_stub(Customer $customer)
+    {
+        // dd($customer);
+        return view('customers.addservices',compact('customer'));
+
+    }
+
+    public function addservicelist_stub(Customer $customer)
+    {
+        dd('addservicelist_stub');
     }
 
     public function search_stub(Request $request)

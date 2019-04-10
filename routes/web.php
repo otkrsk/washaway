@@ -100,6 +100,8 @@ Route::resource('branches', 'BranchController');
 
 Route::resource('menus', 'MenuController');
 
+Route::get('/customers/{customer}/addservice/list', 'CustomerController@addservicelist_stub')->name('customers.addservicelist');
+Route::get('/customers/{customer}/addservice', 'CustomerController@addservice_stub')->name('customers.addservice');
 Route::post('/customers/search', 'CustomerController@search_stub')->name('customers.search');
 Route::resource('customers', 'CustomerController');
 
