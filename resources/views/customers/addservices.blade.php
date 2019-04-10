@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -10,7 +9,7 @@
 
 <div class="row">
   <p>
-    <a href='{{ route("customers.addservice", ["id" => $customer->id]) }}' class='waves-effect waves-light btn'>Add Service</a>
+    <a href='{{ route("customers.addservicelist", ["id" => $customer->id]) }}' class='waves-effect waves-light btn'>Add Service</a>
   </p>
 </div>
 

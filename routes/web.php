@@ -100,6 +100,13 @@ Route::resource('branches', 'BranchController');
 
 Route::resource('menus', 'MenuController');
 
+Route::get('/services/list/services', 'ServiceController@listServices')->name('services.listservices');
+Route::get('/services/list/memberships', 'ServiceController@listMemberships')->name('services.listmemberships');
+Route::get('/services/list/promotions', 'ServiceController@listPromotions')->name('services.listpromotions');
+Route::get('/services/list/unclaimed', 'ServiceController@listUnclaimed')->name('services.listunclaimed');
+Route::get('/services/list/giftcredits', 'ServiceController@giftCredits')->name('services.giftcredits');
+Route::resource('services', 'ServiceController');
+
 Route::get('/customers/{customer}/addservice/list', 'CustomerController@addservicelist_stub')->name('customers.addservicelist');
 Route::get('/customers/{customer}/addservice', 'CustomerController@addservice_stub')->name('customers.addservice');
 Route::post('/customers/search', 'CustomerController@search_stub')->name('customers.search');

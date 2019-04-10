@@ -90,7 +90,8 @@ class CustomerController extends Controller
 
     public function addservicelist_stub(Customer $customer)
     {
-        dd('addservicelist_stub');
+        // dd('addservicelist_stub');
+        return view('customers.addservicelist',compact('customer'));
     }
 
     public function search_stub(Request $request)
