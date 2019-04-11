@@ -98,6 +98,7 @@ Route::resource('payments', 'PaymentController');
 Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');
 Route::resource('branches', 'BranchController');
 
+Route::get('/menus/create/general', 'MenuController@create_general')->name('menus.creategeneral');
 Route::resource('menus', 'MenuController');
 
 Route::get('/services/list/services', 'ServiceController@listServices')->name('services.listservices');

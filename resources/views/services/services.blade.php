@@ -8,13 +8,10 @@
 
 <div class="row">
   <p>
-    TO DO: List all Services from DB
-  </p>
-  <p>
-    Will be calling from 2 tables:
     <ul>
-      <li>One is standard services</li>
-      <li>One will be branch specific</li>
+      @foreach($menuitems as $menuitem)
+        <li>{{ $menuitem->name }} {{ $menuitem->prices->first()->normal_price }}</li>
+      @endforeach
     </ul>
     
   </p>
