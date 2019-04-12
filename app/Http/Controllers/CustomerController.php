@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\Brand;
 use App\Customer;
 use App\Carbrand;
@@ -47,25 +48,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->request);
-
-        $car_type = Carmodel::find('model',$request->model_id);
-        dd($car_type);
+        $branch = Branch::find(\Auth::user()->branches()->first()->id);
+        $car_model = Carmodel::find($request->model_id);
 
         $customer = Customer::create([
-            'plate_no' => $request->plate_no,
+            'plate_no' => strtoupper($request->plate_no),
             'branch_id' => \Auth::user()->branches()->first()->id
         ]);
 
+        $customer->branches()->attach($branch);
+
         $customer_car = Customercar::create([
             'customer_id' => $customer->id,
-            'plate_no' => $request->plate_no,
+            'plate_no' => strtoupper($request->plate_no),
             'brand' => $request->brand_id,
             'model' => $request->model_id,
-            'color' => $request->color_id
+            'color' => $request->color_id,
+            'type' => $car_model->type
         ]);
 
-        return redirect()->route('home');
+        return redirect()->action('CustomerController@show', ['id' => $customer->id]);
     }
 
     /**

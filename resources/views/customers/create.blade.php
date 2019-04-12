@@ -7,7 +7,7 @@
 
   <div class="row">
     <div class="input-field col s12">
-      <input id="plate_no" name="plate_no" type="text" placeholder="Enter Plate No" value="{{ isset($plate_no) ? $plate_no : '' }}" >
+      <input id="plate_no" name="plate_no" type="text" placeholder="Enter Plate No" value="{{ isset($plate_no) ? $plate_no : '' }}" style="text-transform: uppercase;" >
       <label for="plate_no">Plate No</label>
     </div>
   </div>
