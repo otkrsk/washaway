@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use App\MenuItem;
 use Illuminate\Http\Request;
 
@@ -55,9 +56,12 @@ class MenuItemController extends Controller
      * @param  \App\MenuItem  $menuItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(MenuItem $menuItem)
+    public function edit($id)
     {
-        //
+        $item = MenuItem::findOrFail($id);
+        // dd($item);
+        // dd($menuItem);
+        return view('menuitems.edit',compact('item'));
     }
 
     /**
@@ -67,9 +71,36 @@ class MenuItemController extends Controller
      * @param  \App\MenuItem  $menuItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MenuItem $menuItem)
+    public function update(Request $request, $id)
     {
-        //
+        $menuItem = MenuItem::findOrFail($id);
+        $menu = Menu::findOrFail($menuItem->menu->first()->id);
+
+        $menuItemPrices = $menuItem->prices->first();
+
+        $menuItemPrices->normal_price = $request->normal_price;
+        $menuItemPrices->member_price = $request->member_price;
+
+        $menuItemPrices->save();
+
+        return redirect()->action('MenuController@show',['menu' => $menu]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\MenuItem  $menuItem
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $menuItem = MenuItem::findOrFail($id);
+        $menu = Menu::findOrFail($menuItem->menu->first()->id);
+        // dd($menuItem);
+
+        MenuItem::destroy($id);
+
+        return redirect()->action('MenuController@show',['menu' => $menu]);
     }
 
     /**

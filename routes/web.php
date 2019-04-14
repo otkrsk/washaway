@@ -99,7 +99,11 @@ Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branch
 Route::resource('branches', 'BranchController');
 
 Route::get('/menus/create/general', 'MenuController@create_general')->name('menus.creategeneral');
+Route::get('/menus/add/menuitem/{menu}', 'MenuController@add_menuitem')->name('menus.addmenuitem');
 Route::resource('menus', 'MenuController');
+
+Route::get('/delete/{item}', 'MenuItemController@delete')->name('items.delete');
+Route::resource('items', 'MenuItemController');
 
 Route::get('/services/list/services', 'ServiceController@listServices')->name('services.listservices');
 Route::get('/services/list/memberships', 'ServiceController@listMemberships')->name('services.listmemberships');

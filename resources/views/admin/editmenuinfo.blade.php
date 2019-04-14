@@ -8,29 +8,6 @@
 </div>
 
 <div class="row">
-  <a href="{{ route('menus.creategeneral') }}">Create New General Menu</a>
-</div>
-
-<div class="row">
-  <h4>General Menu</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>Menu Items</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      @foreach($general_menu_items as $gmi)
-        <tr>
-          <td>{{ $gmi->name }}</a></td>
-        </tr>
-      @endforeach
-    </tbody>
-  </table>
-</div>
-
-<div class="row">
   <h4>Branch Menus</h4>
   <table>
     <thead>
