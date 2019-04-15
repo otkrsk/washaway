@@ -14,8 +14,14 @@
 </div>
 
 <div class="row">
-  <button type="submit" class="waves-effect waves-light btn-large">Cancel</button>
-  <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
+  @foreach($menuitems as $menuitem)
+    <p>{{ $menuitem->name }} <a href='{{ route("sales.removeservice", ["id" => $customer->id, "sale" => $sale->id, "item" => $menuitem->id]) }}' class='waves-effect waves-light btn'>X</a></p>
+  @endforeach
+</div>
+
+<div class="row">
+  <a href='{{ route("customers.addservicelist", ["id" => $customer->id]) }}' class='waves-effect waves-light btn'>Cancel</a>
+  <a href='{{ route("customers.addservicelist", ["id" => $customer->id]) }}' class='waves-effect waves-light btn'>Submit</a>
 </div>
 
 @endsection

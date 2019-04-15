@@ -25,5 +25,9 @@ class MenuItem extends Model
         return $this->hasMany(Price::class);
     }
 
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class);
+    }
 }
 

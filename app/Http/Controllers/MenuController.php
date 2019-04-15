@@ -69,7 +69,8 @@ class MenuController extends Controller
         {
             $menu_item = MenuItem::create([
                 'menu_id' => $menu->id,
-                'name' => $s_menu['name']
+                'name' => $s_menu['name'],
+                'product_type' => 1
             ]);
 
             $menu_item->menu()->attach($menu);
@@ -88,7 +89,8 @@ class MenuController extends Controller
         {
             $menu_item = MenuItem::create([
                 'menu_id' => $menu->id,
-                'name' => $m_menu['name']
+                'name' => $m_menu['name'],
+                'product_type' => 1
             ]);
 
             $menu_item->menu()->attach($menu);

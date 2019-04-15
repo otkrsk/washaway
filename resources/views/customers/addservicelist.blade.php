@@ -8,7 +8,7 @@
 
 <div class="row">
   <ul>
-    <li><a href="{{ route('services.listservices') }}">Services</a></li>
+    <li><a href="{{ route('services.listservices', ['id' => $customer->id]) }}">Services</a></li>
     <li><a href="{{ route('services.listmemberships') }}">Membership</a></li>
     <li><a href="{{ route('services.listpromotions') }}">Promotion</a></li>
     <li><a href="{{ route('services.listunclaimed') }}">Claim Unclaimed Services</a></li>

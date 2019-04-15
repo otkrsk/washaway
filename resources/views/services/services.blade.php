@@ -7,11 +7,29 @@
 </div>
 
 <div class="row">
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Normal Price</th>
+        <th colspan='2'>Member Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($menuitems as $menuitem)
+        <tr>
+          @if($menuitem->prices->first()->car_type == $customer->cars->first()->type)
+            <td>{{ $menuitem->name }}</td>
+            <td>{{ $menuitem->prices->first()->normal_price }}</td>
+            <td>{{ $menuitem->prices->first()->member_price }}</td>
+            <td><a href='{{ route("sales.new", ["customer" => $customer->id, "item" => $menuitem->id]) }}' class='waves-effect waves-light btn'>Add</a></td>
+          @endif
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
   <p>
     <ul>
-      @foreach($menuitems as $menuitem)
-        <li>{{ $menuitem->name }} {{ $menuitem->prices->first()->normal_price }}</li>
-      @endforeach
     </ul>
     
   </p>

@@ -9,6 +9,7 @@ use App\Carbrand;
 use App\Carcolor;
 use App\Carmodel;
 use App\Customercar;
+use App\Sale;
 
 use Illuminate\Http\Request;
 
@@ -85,9 +86,10 @@ class CustomerController extends Controller
 
     public function addservice_stub(Customer $customer)
     {
-        // dd($customer);
-        return view('customers.addservices',compact('customer'));
+        $sale = Sale::where('customer_id', $customer->id)->first();
+        $menuitems = $sale->menuitems;
 
+        return view('customers.addservices',compact('customer','menuitems','sale'));
     }
 
     public function addservicelist_stub(Customer $customer)

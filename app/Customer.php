@@ -10,7 +10,8 @@ class Customer extends Model
         'name',
         'contact_no',
         'plate_no',
-        'branch_id'
+        'branch_id',
+        'is_member'
     ];
 
     public function branches()

@@ -76,8 +76,10 @@ class MenuItemController extends Controller
         $menuItem = MenuItem::findOrFail($id);
         $menu = Menu::findOrFail($menuItem->menu->first()->id);
 
-        $menuItemPrices = $menuItem->prices->first();
+        $menuItem->name = $request->item_name;
+        $menuItem->save();
 
+        $menuItemPrices = $menuItem->prices->first();
         $menuItemPrices->normal_price = $request->normal_price;
         $menuItemPrices->member_price = $request->member_price;
 

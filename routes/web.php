@@ -81,8 +81,6 @@ Route::get('/member', 'HomeController@member')->name('member');
 Route::get('/report', 'HomeController@report')->name('report');
 Route::get('/appointment', 'HomeController@appointment')->name('appointment');
 
-Route::post('/sales', 'HomeController@newsales_stub')->name('sales.stub');
-
 Route::get('/users/create/{role_id}', 'UserController@create')->name('users.create');
 Route::resource('users', 'UserController');
 
@@ -95,6 +93,11 @@ Route::resource('carmodels', 'CarmodelController');
 Route::get('/payments/delete/{payment}', 'PaymentController@delete')->name('payments.delete');
 Route::resource('payments', 'PaymentController');
 
+Route::post('/sales/open', 'SaleController@open')->name('sales.open');
+Route::get('/sales/remove/{customer}/{sale}/{item}', 'SaleController@remove_service')->name('sales.removeservice');
+Route::get('/sales/new/{customer}/{item}', 'SaleController@new')->name('sales.new');
+Route::resource('sales', 'SaleController');
+
 Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');
 Route::resource('branches', 'BranchController');
 
@@ -105,7 +108,7 @@ Route::resource('menus', 'MenuController');
 Route::get('/delete/{item}', 'MenuItemController@delete')->name('items.delete');
 Route::resource('items', 'MenuItemController');
 
-Route::get('/services/list/services', 'ServiceController@listServices')->name('services.listservices');
+Route::get('/services/list/{customer}/services', 'ServiceController@listServices')->name('services.listservices');
 Route::get('/services/list/memberships', 'ServiceController@listMemberships')->name('services.listmemberships');
 Route::get('/services/list/promotions', 'ServiceController@listPromotions')->name('services.listpromotions');
 Route::get('/services/list/unclaimed', 'ServiceController@listUnclaimed')->name('services.listunclaimed');

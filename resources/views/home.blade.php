@@ -9,7 +9,7 @@
     <div class="collapsible-body">
       <span>Register Cash</span>
 
-      <form method="POST" action="{{ route('sales.stub') }}" class="col s12">
+      <form method="POST" action="{{ route('sales.open') }}" class="col s12">
 
         @csrf
         <div class="row">

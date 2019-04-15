@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
-use App\Menu;
-use App\Service;
+use App\Membership;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class MembershipController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,10 +41,10 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Service  $service
+     * @param  \App\Membership  $membership
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Membership $membership)
     {
         //
     }
@@ -54,10 +52,10 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Service  $service
+     * @param  \App\Membership  $membership
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit(Membership $membership)
     {
         //
     }
@@ -66,10 +64,10 @@ class ServiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Service  $service
+     * @param  \App\Membership  $membership
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, Membership $membership)
     {
         //
     }
@@ -77,39 +75,11 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Service  $service
+     * @param  \App\Membership  $membership
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Membership $membership)
     {
         //
-    }
-
-    public function listServices(Customer $customer)
-    {
-        $services = Menu::where('branch_id', $customer->branch_id)->first();
-        $menuitems = $services->menuitems;
-
-        return view('services.services',compact('menuitems','customer'));
-    }
-
-    public function listMemberships()
-    {
-        return view('services.membership');
-    }
-
-    public function listPromotions()
-    {
-        return view('services.promotion');
-    }
-
-    public function listUnclaimed()
-    {
-        return view('services.unclaimed');
-    }
-
-    public function giftCredits()
-    {
-        return view('services.giftcredits');
     }
 }
