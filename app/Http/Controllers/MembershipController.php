@@ -28,6 +28,24 @@ class MembershipController extends Controller
     }
 
     /**
+     * Create a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function new(Customer $customer, MenuItem $menuItem)
+    {
+        dd($customer);
+        dd('Create New Sale');
+
+        $sale = Sale::create([
+            'user_id' => \Auth::user()->branches()->first()->id,
+            'customer_id' => $customer_id
+        ]);
+
+        $menuItem->sales()->attach($sale);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

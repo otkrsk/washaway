@@ -79,35 +79,46 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        // dd($customer->cars->first()->brand->name);
         $customer_car = $customer->cars->first();
         return view('customers.show',compact('customer','customer_car'));
     }
 
     public function addservice_stub(Customer $customer)
     {
-        $sale = Sale::where('customer_id', $customer->id)->first();
-        $menuitems = $sale->menuitems;
+        $sale = Sale::where('customer_id', $customer->id)
+            ->where('status', 0)
+            ->first();
 
-        return view('customers.addservices',compact('customer','menuitems','sale'));
+        if($sale)
+        {
+            $menuitems = $sale->menuitems;
+            return view('customers.addservices',compact('customer','menuitems','sale'));
+        }
+        else
+        {
+            // dd('no sale yet');
+            return view('customers.addnewservices',compact('customer'));
+        }
+
     }
 
     public function addservicelist_stub(Customer $customer)
     {
-        // dd('addservicelist_stub');
         return view('customers.addservicelist',compact('customer'));
     }
 
     public function search_stub(Request $request)
     {
-        // dd($request->request);
+        $customer_car = Customercar::where('plate_no','like',$request->plate_no)->first();
+        $has_car = count($customer_car) > 0 ? true : false;
 
-        $customer_car = Customercar::where('plate_no','like',$request->plate_no)->get();
-        $customer = count($customer_car) > 0 ? true : false;
+        // dd($customer_car);
+        $customer = $customer_car->customers;
+        // dd($customer->id);
 
-        if($customer)
+        if($has_car)
         {
-            return redirect()->action('CustomerController@show', ['id' => 1]);
+            return redirect()->action('CustomerController@show', ['id' => $customer->id]);
         }
         else
         {

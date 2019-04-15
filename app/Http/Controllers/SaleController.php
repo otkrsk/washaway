@@ -44,17 +44,68 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function new(Customer $customer, MenuItem $menuItem)
+    public function new(Customer $customer, $id)
     {
-        dd($customer);
-        dd('Create New Sale');
+        $menuItem = MenuItem::findOrFail($id);
 
-        $sale = Sale::create([
-            'user_id' => \Auth::user()->branches()->first()->id,
-            'customer_id' => $customer_id
-        ]);
+        $sale = Sale::where('user_id',\Auth::user()->branches()->first()->id)
+            ->where('customer_id',$customer->id)
+            ->where('status',0)
+            ->get();
 
-        $menuItem->sales()->attach($sale);
+        if(count($sale) > 0) {
+            $menuItem->sales()->attach($sale);
+            return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
+        }
+        else
+        {
+            $sale = Sale::create([
+                'user_id' => \Auth::user()->branches()->first()->id,
+                'customer_id' => $customer->id,
+                'status' => 0
+            ]);
+
+            $menuItem->sales()->attach($sale);
+            return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
+        }
+    }
+
+    /**
+     * Create a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function submit(Sale $sale)
+    {
+        // TODO: total up the sale
+        /**
+         * 1. Find if the customer is member.
+         * 2. Get the corresponding prices.
+         * 3. Sum the total.
+         * 4. Insert the total into the sale_total column.
+         */
+
+        $customer = Customer::find($sale->customer_id);
+        $menuitems = $sale->menuitems;
+
+        foreach($menuitems as $menuitem)
+        {
+            $sales_total[] = ($customer->is_member) ? $menuitem->prices()->first()->member_price : $menuitem->prices()->first()->normal_price;
+        }
+
+        $sum = 0;
+
+        foreach($sales_total as $st)
+        {
+            $sum += $st;
+        }
+
+        $sale->status = 1;
+        $sale->sales_total = $sum;
+        $sale->save();
+
+        // redirect back to home page
+        return redirect('/');
     }
 
     /**

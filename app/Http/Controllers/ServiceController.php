@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Menu;
+use App\MenuItem;
 use App\Service;
 use Illuminate\Http\Request;
 
@@ -93,9 +94,12 @@ class ServiceController extends Controller
         return view('services.services',compact('menuitems','customer'));
     }
 
-    public function listMemberships()
+    public function listMemberships(Customer $customer)
     {
-        return view('services.membership');
+        $memberships = MenuItem::where('product_type',2)->get();
+        // dd($memberships);
+
+        return view('services.membership',compact('customer','memberships'));
     }
 
     public function listPromotions()

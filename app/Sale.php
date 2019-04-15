@@ -8,7 +8,8 @@ class Sale extends Model
 {
     protected $fillable = [
         'user_id',
-        'customer_id'
+        'customer_id',
+        'status'
     ];
 
     public function branches()

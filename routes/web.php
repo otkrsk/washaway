@@ -11,47 +11,6 @@
 |
 */
 
-Route::get('/jsontest', function () {
-    $models = [
-        1 => [
-            'Coo',
-            'Daz',
-            'Mui',
-        ],
-        2 => [
-            'Qua',
-            'Ink',
-            'Scoop',
-        ]
-    ];
-
-    dd($models[1]);
-
-    $brands = [
-        [
-            "id" => 1,
-            "brand" => "Honda"
-        ],
-        [
-            "id" => 2,
-            "brand" => "Toyota"
-        ],
-        [
-            "id" => 3,
-            "brand" => "Nissan"
-        ],
-        [
-            "id" => 4,
-            "brand" => "Proton"
-        ]
-    ];
-
-    $contents = Storage::get('public/brands.json');
-    $contents = json_decode($contents);
-    // dd($contents);
-    return view('jsontest',compact('contents'));
-});
-
 Route::get('/', function () {
     return redirect()->action('HomeController@index');
 });
@@ -94,9 +53,13 @@ Route::get('/payments/delete/{payment}', 'PaymentController@delete')->name('paym
 Route::resource('payments', 'PaymentController');
 
 Route::post('/sales/open', 'SaleController@open')->name('sales.open');
+Route::get('/sales/{sale}/submit', 'SaleController@submit')->name('sales.submit');
 Route::get('/sales/remove/{customer}/{sale}/{item}', 'SaleController@remove_service')->name('sales.removeservice');
 Route::get('/sales/new/{customer}/{item}', 'SaleController@new')->name('sales.new');
 Route::resource('sales', 'SaleController');
+
+Route::get('/memberships/new/{customer}/{item}', 'MembershipController@new')->name('memberships.new');
+Route::resource('memberships', 'MembershipController');
 
 Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');
 Route::resource('branches', 'BranchController');
@@ -109,7 +72,7 @@ Route::get('/delete/{item}', 'MenuItemController@delete')->name('items.delete');
 Route::resource('items', 'MenuItemController');
 
 Route::get('/services/list/{customer}/services', 'ServiceController@listServices')->name('services.listservices');
-Route::get('/services/list/memberships', 'ServiceController@listMemberships')->name('services.listmemberships');
+Route::get('/services/list/{customer}/memberships', 'ServiceController@listMemberships')->name('services.listmemberships');
 Route::get('/services/list/promotions', 'ServiceController@listPromotions')->name('services.listpromotions');
 Route::get('/services/list/unclaimed', 'ServiceController@listUnclaimed')->name('services.listunclaimed');
 Route::get('/services/list/giftcredits', 'ServiceController@giftCredits')->name('services.giftcredits');

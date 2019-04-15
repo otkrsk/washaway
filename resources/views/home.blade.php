@@ -30,26 +30,34 @@
   </li>
   <li>
     <div class="collapsible-header"><i class="material-icons">attach_money</i>Payment</div>
-    <div class="collapsible-body"><span>&nbsp;</span></div>
+    <div class="collapsible-body">
+      @if(count($sales) > 0)
+        <table>
+          <thead>
+            <tr>
+              <th>Plate No</th>
+              <th>Model</th>
+              <th colspan="2">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($sales as $sale)
+              <tr>
+                <td>{{ $sale->id }}</td>
+                <td>{{ $sale->status }}</td>
+                <td>{{ $sale->sales_total }}</td>
+                <td><a href="#">Pay</a></td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      @endif
+    </div>
   </li>
   <li>
     <div class="collapsible-header"><i class="material-icons">date_range</i>Today Sales</div>
     <div class="collapsible-body"><span>&nbsp;</span></div>
   </li>
 </ul>
-
-<!-- Modal Trigger -->
-<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-  <div class="modal-content">
-    <h4>Modal Header</h4>
-    <p>A bunch of text</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div>
-</div>
 
 @endsection

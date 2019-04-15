@@ -28,11 +28,6 @@
       @endforeach
     </tbody>
   </table>
-  <p>
-    <ul>
-    </ul>
-    
-  </p>
 </div>
 
 @endsection

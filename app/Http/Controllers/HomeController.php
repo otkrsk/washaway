@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         // dd(\Auth::user()->branches()->first()->name);
-        return view('home');
+        $sales = Sale::where('status',1)->get();
+
+        return view('home',compact('sales'));
     }
 
     /**
