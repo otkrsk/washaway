@@ -49,6 +49,9 @@ Route::resource('cars', 'CarController');
 Route::post('/ajax/test', 'CarmodelController@ajaxcall')->name('ajax.test');
 Route::resource('carmodels', 'CarmodelController');
 
+Route::get('/payments/{sale}/pay', 'PaymentController@pay')->name('payments.pay');
+Route::get('/payments/{sale}/confirm', 'PaymentController@confirm')->name('payments.confirm');
+Route::get('/payments/{sale}/summary', 'PaymentController@summary')->name('payments.summary');
 Route::get('/payments/delete/{payment}', 'PaymentController@delete')->name('payments.delete');
 Route::resource('payments', 'PaymentController');
 

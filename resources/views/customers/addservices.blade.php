@@ -14,9 +14,16 @@
 </div>
 
 <div class="row">
-  @foreach($menuitems as $menuitem)
-    <p>{{ $menuitem->name }} <a href='{{ route("sales.removeservice", ["id" => $customer->id, "sale" => $sale->id, "item" => $menuitem->id]) }}' class='waves-effect waves-light btn'>X</a></p>
-  @endforeach
+  <table>
+    <tbody>
+      @foreach($menuitems as $menuitem)
+        <tr>
+          <td>{{ $menuitem->name }}</td>
+          <td><a href='{{ route("sales.removeservice", ["id" => $customer->id, "sale" => $sale->id, "item" => $menuitem->id]) }}' class='waves-effect waves-light btn'>X</a></td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
 </div>
 
 <div class="row">

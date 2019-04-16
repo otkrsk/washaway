@@ -43,10 +43,10 @@
           <tbody>
             @foreach($sales as $sale)
               <tr>
-                <td>{{ $sale->id }}</td>
-                <td>{{ $sale->status }}</td>
+                <td>{{ strtoupper($sale->customers->first()->cars()->first()->plate_no) }}</td>
+                <td>{{ $sale->customers->first()->cars()->first()->model()->first()->name }}</td>
                 <td>{{ $sale->sales_total }}</td>
-                <td><a href="#">Pay</a></td>
+                <td><a href="{{ route('payments.summary', ['sale' => $sale]) }}">Pay</a></td>
               </tr>
             @endforeach
           </tbody>

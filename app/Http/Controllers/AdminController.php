@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Branch;
-use App\Car;
+use App\Carbrand;
+use App\Carmodel;
 use App\GeneralMenu;
 use App\GeneralMenuItem;
 use App\Menu;
@@ -67,7 +68,8 @@ class AdminController extends Controller
 
     public function editCarInfo()
     {
-        $carArray = Car::get();
+        $carArray = Carbrand::get();
+        dd($carArray);
 
         return view('admin.editcarinfo', compact('carArray'));
     }

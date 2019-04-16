@@ -7,13 +7,24 @@
 </div>
 
 <div class="row">
-  <ul>
-    <li><a href="{{ route('services.listservices', ['id' => $customer->id]) }}">Services</a></li>
-    <li><a href="{{ route('services.listmemberships', ['id' => $customer->id]) }}">Membership</a></li>
-    <li style="visibility:hidden;"><a href="{{ route('services.listpromotions') }}">Promotion</a></li>
-    <li style="visibility:hidden;"><a href="{{ route('services.listunclaimed') }}">Claim Unclaimed Services</a></li>
-    <li style="visibility:hidden;"><a href="{{ route('services.giftcredits') }}">Gift Credits</a></li>
-  </ul>
+  <table>
+    <tbody>
+      <tr>
+        <td><a href="{{ route('services.listservices', ['id' => $customer->id]) }}">Services</a></td>
+      </tr>
+      <tr>
+        <td><a href="{{ route('services.listmemberships', ['id' => $customer->id]) }}">Membership</a></td>
+      </tr>
+        <td style="visibility:hidden;"><a href="{{ route('services.listpromotions') }}">Promotion</a></td>
+      <tr>
+      </tr>
+        <td style="visibility:hidden;"><a href="{{ route('services.listunclaimed') }}">Claim Unclaimed Services</a></td>
+      </tr>
+      <tr>
+        <td style="visibility:hidden;"><a href="{{ route('services.giftcredits') }}">Gift Credits</a></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="row">
