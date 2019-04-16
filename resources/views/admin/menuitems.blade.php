@@ -16,18 +16,6 @@
   </div>
 </a>
 <div class="divider"></div>
-<a href="{{ route('admin.editpayment') }}">
-  <div class="section">
-    <h5>Manage Payment Type</h5>
-  </div>
-</a>
-<div class="divider"></div>
-<a href="{{ route('admin.editunclaimed') }}">
-  <div class="section">
-    <h5>Manage Unclaimed Service Attach to Plate No</h5>
-  </div>
-</a>
-<div class="divider"></div>
 <a href="{{ route('admin.editmembers') }}">
   <div class="section">
     <h5>Manage Users</h5>
@@ -40,13 +28,28 @@
   </div>
 </a>
 <div class="divider"></div>
-<a href="{{ route('admin.searchtransaction') }}">
+<a href="{{ route('admin.editpayment') }}">
+  <div class="section">
+    <h5>Manage Payment Type</h5>
+  </div>
+</a>
+<div class="divider"></div>
+<!-- <a href="{{ route('admin.editunclaimed') }}"> -->
+<a href="#">
+  <div class="section">
+    <h5>Manage Unclaimed Service Attach to Plate No</h5>
+  </div>
+</a>
+<div class="divider"></div>
+<!-- <a href="{{ route('admin.searchtransaction') }}"> -->
+<a href="#">
   <div class="section">
     <h5>Search Transaction to Edit/Remove</h5>
   </div>
 </a>
 <div class="divider"></div>
-<a href="{{ route('admin.editfreeunclaimed') }}">
+<!-- <a href="{{ route('admin.editfreeunclaimed') }}"> -->
+<a href="#">
   <div class="section">
     <h5>Edit Membership's Free Unclaimed Services</h5>
   </div>

@@ -69,7 +69,7 @@ class AdminController extends Controller
     public function editCarInfo()
     {
         $carArray = Carbrand::get();
-        dd($carArray);
+        // dd($carArray);
 
         return view('admin.editcarinfo', compact('carArray'));
     }

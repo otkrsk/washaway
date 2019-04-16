@@ -16,7 +16,7 @@
     <tr>
       <th>Brand</th>
       <th>Model</th>
-      <th colspan=2>Colour</th>
+      <th colspan="2">Colour</th>
     </tr>
   </thead>
 
