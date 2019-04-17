@@ -117,6 +117,7 @@ class PaymentController extends Controller
          * 1. Create Payment Object
          * 2. Generate Receipt No.
          * 3. Insert Paid Time
+         * 4. Update Sale Status = 2
          */
 
         $receipt_no = "receipt_" . rand(10000,99999);
@@ -129,6 +130,9 @@ class PaymentController extends Controller
             'payment_method' => 1,
             'status' => 1
         ]);
+
+        $sale->status = 2;
+        $sale->save();
 
         return redirect()->action('HomeController@index');
     }

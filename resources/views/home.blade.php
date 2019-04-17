@@ -51,6 +51,8 @@
             @endforeach
           </tbody>
         </table>
+      @else
+        No sales yet for today.
       @endif
     </div>
   </li>
