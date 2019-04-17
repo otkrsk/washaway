@@ -12,3 +12,5 @@ npm-debug.log
 yarn-error.log
 resources/views/home.blade.backup.php
 resources/views/menus/create.blade.backup2.php
+index.html
+env
