@@ -8,7 +8,7 @@
 
       <tr>
         <td>{{ $cc_plate_no }}</td>
-        <td>Time Entry: 4:20PM</td>
+        <td>Time Entry: {{ date_format($sale->created_at, 'H:i:s') }}</td>
       </tr>
 
       <tr>
@@ -61,7 +61,7 @@
       </tr>
 
       <tr>
-        <td><a href='#' class='waves-effect waves-light btn'>Cancel Sales</a></td>
+        <td><a href='{{ route("sales.cancel", ["sale" => $sale]) }}' class='waves-effect waves-light btn'>Cancel Sales</a></td>
         <td><a href='#' class='waves-effect waves-light btn'>Edit Services</a></td>
       </tr>
 

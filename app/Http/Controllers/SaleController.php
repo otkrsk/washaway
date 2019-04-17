@@ -62,7 +62,9 @@ class SaleController extends Controller
             $sale = Sale::create([
                 'user_id' => \Auth::user()->branches()->first()->id,
                 'customer_id' => $customer->id,
-                'status' => 0
+                'status' => 0,
+                'sales_total' => 0,
+                'is_cancel' => false
             ]);
 
             $menuItem->sales()->attach($sale);
@@ -77,7 +79,6 @@ class SaleController extends Controller
      */
     public function submit(Sale $sale)
     {
-        // TODO: total up the sale
         /**
          * 1. Find if the customer is member.
          * 2. Get the corresponding prices.
@@ -102,6 +103,22 @@ class SaleController extends Controller
 
         $sale->status = 1;
         $sale->sales_total = $sum;
+        $sale->save();
+
+        // redirect back to home page
+        return redirect('/');
+    }
+
+    /**
+     * Create a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel(Sale $sale)
+    {
+        // dd($sale);
+
+        $sale->is_cancel = true;
         $sale->save();
 
         // redirect back to home page

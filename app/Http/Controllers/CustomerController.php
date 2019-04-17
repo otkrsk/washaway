@@ -87,6 +87,7 @@ class CustomerController extends Controller
     {
         $sale = Sale::where('customer_id', $customer->id)
             ->where('status', 0)
+            ->where('is_cancel', false)
             ->first();
 
         if($sale)

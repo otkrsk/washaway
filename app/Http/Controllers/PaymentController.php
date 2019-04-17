@@ -49,8 +49,6 @@ class PaymentController extends Controller
      */
     public function summary(Sale $sale)
     {
-        // dd($sale);
-
         /**
          * PAYMENT OBJECT
          * 
@@ -133,6 +131,8 @@ class PaymentController extends Controller
 
         $sale->status = 2;
         $sale->save();
+
+        // If there is a Member Subscription present, need to update Customer status from Walk-In to Member
 
         return redirect()->action('HomeController@index');
     }
