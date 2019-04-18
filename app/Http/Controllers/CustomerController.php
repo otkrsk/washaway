@@ -113,12 +113,9 @@ class CustomerController extends Controller
         $customer_car = Customercar::where('plate_no','like',$request->plate_no)->first();
         $has_car = count($customer_car) > 0 ? true : false;
 
-        // dd($customer_car);
-        $customer = $customer_car->customers;
-        // dd($customer->id);
-
         if($has_car)
         {
+            $customer = $customer_car->customers;
             return redirect()->action('CustomerController@show', ['id' => $customer->id]);
         }
         else
