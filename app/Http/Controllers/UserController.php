@@ -43,21 +43,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // dd($request->request);
-        dd($request->rid);
+        // dd($request->rid);
 
         $role = Role::find($request->rid);
-        $branch_id = $request->branch_id;
+        $branch = Branch::find($request->branch_id);
         $username = $request->username;
 
         $user = User::create([
-            'name' => 'Dick',
-            'username' => 'walla',
-            'email' => 'walla@bingbang.com',
+            'name' => $username,
+            'username' => $username,
+            'email' => $username.'@washaway.com',
             'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => bcrypt('secret')
         ]);
 
-        $user->roles()->save($role);
+        $user->roles()->attach($role);
+        $user->branches()->attach($branch);
 
         return redirect()->route('admin.editmembers');
     }

@@ -19,7 +19,7 @@
       @foreach($admin as $ad)
         <tr>
           <td><a href="{{ route('users.show', ['id' => $ad->id]) }}">{{ $ad->username }}</a></td>
-          <td>Puchong</td>
+          <td>{{ $ad->branches->first()->name }}</td>
         </tr>
       @endforeach
     </tbody>
@@ -43,7 +43,7 @@
       @foreach($staff as $st)
         <tr>
           <td><a href="{{ route('users.show', ['id' => $st->id]) }}">{{ $st->username }}</a></td>
-          <td>Puchong</td>
+          <td>{{ $st->branches->first()->name }}</td>
         </tr>
       @endforeach
     </tbody>

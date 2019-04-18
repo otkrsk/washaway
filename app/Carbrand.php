@@ -14,4 +14,9 @@ class Carbrand extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function carModels()
+    {
+        return $this->hasMany(Carmodel::class, 'carbrand_id', 'id');
+    }
 }

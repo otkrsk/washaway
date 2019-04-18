@@ -3,33 +3,56 @@
 @section('content')
 <h3>Edit Car Information</h3>
 
-<div class="divider"></div>
-  <div class="section">
-    <a href="{{ route('cars.create') }}">
-      <h5>Add Car</h5>
-    </a>
-  </div>
-<div class="divider"></div>
-
+<h5>Brands</h5>
 <table>
   <thead>
     <tr>
       <th>Brand</th>
-      <th>Model</th>
-      <th colspan="2">Colour</th>
     </tr>
   </thead>
 
   <tbody>
     @foreach($carArray as $car)
       <tr>
-        <td>{{ $car->brand }}</td>
-        <td>{{ $car->model }}</td>
-        <td>{{ $car->color }}</td>
-        <td><a href="{{ route('cars.delete', ['id' => $car->id]) }}">Delete</a></td>
+        <td>{{ $car->name }}</td>
       </tr>
     @endforeach
   </tbody>
 </table>
+
+<div class="divider"></div>
+<div class="section">
+  <a href="{{ route('cars.create',['flag' => 1]) }}">Add Brand</a>
+</div>
+
+<h5>Models</h5>
+<table>
+  <thead>
+    <tr>
+      <th>Brand</th>
+      <th>Model</th>
+      <th colspan="3">Type</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @foreach($carArray as $car)
+      @foreach($car->carModels as $carModel)
+        <tr>
+          <td>{{ $car->name }}</td>
+          <td>{{ $carModel->name }}</td>
+          <td>{{ $carModel->carType->type }}</td>
+          <td><a href="#">Edit</a></td>
+          <td><a href="{{ route('cars.delete', ['id' => $carModel->id]) }}">Delete</a></td>
+        </tr>
+      @endforeach
+    @endforeach
+  </tbody>
+</table>
+
+<div class="divider"></div>
+<div class="section">
+  <a href="{{ route('cars.create',['flag' => 2]) }}">Add Model</a>
+</div>
 
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Carbrand;
+use App\Carmodel;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -24,7 +26,18 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('cars.create');
+        $flag = $_GET['flag'];
+
+        switch($flag)
+        {
+            case 1:
+                return view('cars.createbrand');
+                break;
+            case 2:
+                $brands = Carbrand::get();
+                return view('cars.createmodel',compact('brands'));
+                break;
+        }
     }
 
     /**
@@ -35,13 +48,19 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->request);
-
-        $car = Car::create([
-            'brand' => $request->brand,
-            'model' => $request->model,
-            'color' => $request->color
-        ]);
+        switch($request->flag)
+        {
+            case 1:
+                $carBrand = Carbrand::create(['name' => $request->brand]);
+                break;
+            case 2:
+                $carModel = Carmodel::create([
+                    'name' => $request->model,
+                    'carbrand_id' => $request->brand,
+                    'type' => $request->car_type
+                ]);
+                break;
+        }
 
         return redirect()->route('admin.editcarinfo');
 
@@ -81,12 +100,9 @@ class CarController extends Controller
         //
     }
 
-    public function delete(Car $car)
+    public function delete($id)
     {
-        // dd($car->id);
-        // $car = Car::find($car);
-        Car::destroy($car->id);
-
+        Carmodel::destroy($id);
         return redirect()->route('admin.editcarinfo');
     }
 
