@@ -29,5 +29,9 @@ class MenuItem extends Model
     {
         return $this->belongsToMany(Sale::class);
     }
-}
 
+    public function unclaimed()
+    {
+        return $this->hasMany(Unclaim::class);
+    }
+}

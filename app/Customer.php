@@ -14,6 +14,12 @@ class Customer extends Model
         'is_member'
     ];
 
+    // Relationships
+    public function membership()
+    {
+        return $this->hasOne(Membership::class);
+    }
+
     public function branches()
     {
         return $this->belongsToMany(Branch::class);
@@ -29,4 +35,16 @@ class Customer extends Model
         // return $this->hasMany(Sale::class);
         return $this->belongsToMany(Sale::class);
     }
+
+    public function unclaimed()
+    {
+        return $this->hasMany(Unclaimed::class);
+    }
+
+    // Functions
+    public function member_status(Customer $customer)
+    {
+        return $this->hasMany(Unclaimed::class);
+    }
+
 }

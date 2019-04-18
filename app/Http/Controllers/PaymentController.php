@@ -133,6 +133,16 @@ class PaymentController extends Controller
         $sale->save();
 
         // If there is a Member Subscription present, need to update Customer status from Walk-In to Member
+        /**
+         * 1. Check if Member Subscription is present
+         */
+
+        // $m = Membership::create([                                                                                                                                                                                                           
+        //     'customer_id' => $c->id,
+        //     'membership_type'=>1,
+        //     'membership_expires'=>date('Y-m-d H:i:s',strtotime('+1 year')),                                                                                                                            
+        //     'is_expired' => false
+        // ]);
 
         return redirect()->action('HomeController@index');
     }

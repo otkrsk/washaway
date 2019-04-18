@@ -87,6 +87,9 @@ Route::get('/customers/{customer}/addservice', 'CustomerController@addservice_st
 Route::post('/customers/search', 'CustomerController@search_stub')->name('customers.search');
 Route::resource('customers', 'CustomerController');
 
+Route::post('/unclaimed/search', 'UnclaimedController@search')->name('unclaimed.search');
+Route::resource('unclaimed', 'UnclaimedController');
+
 Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
     Route::get('/index', 'AdminController@showMenuItems')->name('admin.index');
 

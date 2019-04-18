@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Membership extends Model
 {
     protected $fillable = [
-        'name',
-        'price',
         'customer_id',
         'membership_type',
-        'membership_expires'
+        'membership_expires',
+        'is_expired'
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
 }

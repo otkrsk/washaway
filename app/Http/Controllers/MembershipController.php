@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Membership;
 use Illuminate\Http\Request;
 
@@ -62,9 +63,11 @@ class MembershipController extends Controller
      * @param  \App\Membership  $membership
      * @return \Illuminate\Http\Response
      */
-    public function show(Membership $membership)
+    public function show($customer)
     {
-        //
+        $member = Customer::find($customer);
+        // dd($member);
+        return view('members.show',compact('member'));
     }
 
     /**
