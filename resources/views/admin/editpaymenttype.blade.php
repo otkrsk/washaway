@@ -5,7 +5,7 @@
 
 <div class="divider"></div>
   <div class="section">
-    <a href="{{ route('payments.create') }}">
+    <a href="{{ route('types.create') }}">
       <h5>Add New Payment Type</h5>
     </a>
   </div>
@@ -21,8 +21,9 @@
   <tbody>
     @foreach($paymentTypes as $pt)
       <tr>
-        <td>{{ $pt->name }}</td>
-        <td><a href="{{ route('payments.delete', ['id' => $pt->id]) }}">Delete</a></td>
+        <td>{{ ucwords($pt->name) }}</td>
+        <td><a href="{{ route('types.edit', ['id' => $pt->id]) }}">Edit</a></td>
+        <td><a href="{{ route('types.delete', ['id' => $pt->id]) }}">Delete</a></td>
       </tr>
     @endforeach
   </tbody>

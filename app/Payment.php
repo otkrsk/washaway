@@ -14,4 +14,9 @@ class Payment extends Model
         'payment_method',
         'status'
     ];
+
+    // public function paymentType()
+    // {
+    //     return $this->hasOne(PaymentType::class, 'payment_method');
+    // }
 }

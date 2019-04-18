@@ -11,6 +11,7 @@ use App\GeneralMenuItem;
 use App\Menu;
 use App\MenuItem;
 use App\Payment;
+use App\PaymentType;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -76,7 +77,8 @@ class AdminController extends Controller
 
     public function editPaymentType()
     {
-        $paymentTypes = Payment::get();
+        $paymentTypes = PaymentType::get();
+        // dd($paymentTypes);
 
         return view('admin.editpaymenttype', compact('paymentTypes'));
     }

@@ -55,6 +55,9 @@ Route::get('/payments/{sale}/summary', 'PaymentController@summary')->name('payme
 Route::get('/payments/delete/{payment}', 'PaymentController@delete')->name('payments.delete');
 Route::resource('payments', 'PaymentController');
 
+Route::get('/payments/types/{type}/delete', 'PaymentTypeController@delete')->name('types.delete');
+Route::resource('payment/types', 'PaymentTypeController');
+
 Route::post('/sales/open', 'SaleController@open')->name('sales.open');
 Route::get('/sales/{sale}/cancel', 'SaleController@cancel')->name('sales.cancel');
 Route::get('/sales/{sale}/submit', 'SaleController@submit')->name('sales.submit');
