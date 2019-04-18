@@ -110,8 +110,9 @@ class CustomerController extends Controller
 
     public function search_stub(Request $request)
     {
-        dd($request->request);
+        // dd($request->request);
         $customer_car = Customercar::where('plate_no','like',$request->plate_no)->first();
+        dd($customer_car);
         $has_car = count($customer_car) > 0 ? true : false;
         dd($has_car);
 
