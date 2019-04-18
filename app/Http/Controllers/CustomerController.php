@@ -113,7 +113,7 @@ class CustomerController extends Controller
         // dd($request->request);
         $customer_car = Customercar::where('plate_no','like',$request->plate_no)->first();
         // dd($customer_car);
-        // dd(count($customer_car));
+        dd(count($customer_car));
         // $has_car = (count($customer_car) > 0) ? true : false;
         // dd($has_car);
 
