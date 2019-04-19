@@ -51,6 +51,7 @@ class SaleController extends Controller
         $sale = Sale::where('user_id',\Auth::user()->branches()->first()->id)
             ->where('customer_id',$customer->id)
             ->where('status',0)
+            ->where('is_cancel',false)
             ->get();
 
         if(count($sale) > 0) {
@@ -68,6 +69,8 @@ class SaleController extends Controller
             ]);
 
             $menuItem->sales()->attach($sale);
+            $sale->customers()->attach($customer);
+
             return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
         }
     }
