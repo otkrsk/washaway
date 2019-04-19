@@ -34,4 +34,9 @@ class Customercar extends Model
     {
         return $this->hasOne(Carcolor::class, 'id', 'color');
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }

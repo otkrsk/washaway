@@ -63,6 +63,7 @@ class SaleController extends Controller
             $sale = Sale::create([
                 'user_id' => \Auth::user()->branches()->first()->id,
                 'customer_id' => $customer->id,
+                'customercar_id' => $customer->cars->first()->id,
                 'status' => 0,
                 'sales_total' => 0,
                 'is_cancel' => false

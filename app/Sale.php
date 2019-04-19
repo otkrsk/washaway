@@ -9,6 +9,7 @@ class Sale extends Model
     protected $fillable = [
         'user_id',
         'customer_id',
+        'customercar_id',
         'status',
         'sales_total',
         'is_cancel'
@@ -27,10 +28,17 @@ class Sale extends Model
         // return $this->hasMany(Customer::class, 'sales', 'customer_id', 'id');
     }
 
+    public function customercar()
+    {
+        return $this->belongsTo(Customercar::class);
+        // return $this->belongsToMany(Customer::class, 'sales', 'customer_id', 'id');
+        // return $this->hasMany(Customer::class, 'sales', 'id', 'customer_id');
+        // return $this->hasMany(Customer::class, 'sales', 'customer_id', 'id');
+    }
+
     public function menuitems()
     {
         // return $this->belongsToMany(MenuItem::class, 'menu_item_sale', 'menu_item_id', 'sale_id');
         return $this->belongsToMany(MenuItem::class);
     }
-
 }

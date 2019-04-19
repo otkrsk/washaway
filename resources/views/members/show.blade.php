@@ -15,7 +15,7 @@
     <table>
       <tbody>
         <tr>
-          <td>Plate No:</td><td>{{ $member->cars->first()->plate_no }}</td>
+          <td>Plate No:</td><td><a href="#">{{ $member->cars->first()->plate_no }}</a></td>
         </tr>
         <tr>
           <td>Make & Model:</td><td>{{ $member->cars->first()->brand()->first()->name }} {{ $member->cars->first()->model()->first()->name }}</td>
