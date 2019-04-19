@@ -16,9 +16,16 @@ class UnclaimedController extends Controller
     public function search(Request $request)
     {
         $customer = isset($request->contact_no) ? Customer::where('contact_no','like',$request->contact_no)->where('is_member',true)->first() : Customer::where('plate_no','like',$request->plate_no)->where('is_member',true)->first(); 
-        // dd($customer);
+        if(!$customer)
+        {
+            return back()->with('error', 'No Membership Found');
+        }
 
         $unclaimed = Unclaimed::where('customer_id',$customer->id)->get();
+        // $unclaimed = Unclaimed::whereHas('customers', function($query) use ($customer) {
+        //     $query->where('customer_id',$customer->id);
+        // })->get();
+
         // dd($unclaimed);
 
         if($request->search_type == "member")
@@ -27,7 +34,7 @@ class UnclaimedController extends Controller
         }
         else
         {
-            // redirect to unclaimed services search result page
+            // TODO: redirect to unclaimed services search result page
             return view('sales.create');
         }
     }

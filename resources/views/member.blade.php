@@ -9,6 +9,12 @@
     <div class="collapsible-body">
       <span>Member Search</span>
 
+      @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-block">
+          <strong style="color:red;">{{ $message }}</strong>
+        </div>
+      @endif
+
       <form method="POST" action="{{ route('unclaimed.search') }}" class="col s12">
 
         @csrf
