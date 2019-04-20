@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\MenuItem;
 use App\Unclaimed;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,49 @@ class UnclaimedController extends Controller
     public function create()
     {
         dd('UnclaimedController@create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Customer  $customer
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function add(Request $request, Customer $customer)
+    {
+        if(is_null($request->menu_item))
+        {
+            return back()->with('error', 'No Service Selected');
+        }
+
+        $menuItems = $request->menu_item;
+        $akeys = array_keys($menuItems);
+
+        $menuItem = MenuItem::whereIn('id',$akeys)->get();
+
+        $authUser = \Auth::user();
+        $hasSale = Customer::hasSale($customer,$authUser);
+
+        if(!$hasSale)
+        {
+            $sale = Sale::create([
+                'user_id' => \Auth::user()->branches()->first()->id,
+                'customer_id' => $customer->id,
+                'customercar_id' => $customer->cars->first()->id,
+                'status' => 0,
+                'sales_total' => 0,
+                'is_cancel' => false
+            ]);
+
+            $sale->customers()->attach($customer);
+        }
+
+        $sale = $hasSale['sale'][0];
+        foreach($menuItem as $mi) $mi->sales()->attach($sale);
+
+        return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
+
     }
 
     /**

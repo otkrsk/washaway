@@ -6,6 +6,8 @@
   <h3>Select Service Category</h3>
 </div>
 
+<?php $i = 0; ?>
+
 <div class="row">
   <table>
     <tbody>
@@ -15,14 +17,25 @@
       <tr>
         <td><a href="{{ route('services.listmemberships', ['id' => $customer->id]) }}">Membership</a></td>
       </tr>
+
+      @if($i == 1)
+      </tr>
         <td style="visibility:hidden;"><a href="{{ route('services.listpromotions') }}">Promotion</a></td>
       <tr>
-      </tr>
+      @endif
+
+      @if($customer->is_member)
+      <tr>
         <td><a href="{{ route('unclaimed.list',['customer' => $customer->id]) }}">Claim Unclaimed Services</a></td>
       </tr>
+      @endif()
+
+      @if($i == 1)
       <tr>
-        <td style="visibility:hidden;"><a href="{{ route('services.giftcredits') }}">Gift Credits</a></td>
+        <td><a href="{{ route('services.giftcredits') }}">Gift Credits</a></td>
       </tr>
+      @endif()
+
     </tbody>
   </table>
 </div>
