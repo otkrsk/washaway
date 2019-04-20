@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Sale;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
@@ -14,7 +16,10 @@ class Customer extends Model
         'is_member'
     ];
 
-    // Relationships
+    // ==================================
+    // List of all Relationships
+    // ==================================
+
     public function membership()
     {
         return $this->hasOne(Membership::class);
@@ -41,10 +46,39 @@ class Customer extends Model
         return $this->hasMany(Unclaimed::class);
     }
 
-    // Functions
+    // ==================================
+    // List of all Functions
+    // ==================================
+
     public function member_status(Customer $customer)
     {
         return $this->hasMany(Unclaimed::class);
+    }
+
+    public static function hasSale(Customer $customer, $authUser)
+    {
+        $sale = Sale::where('user_id',$authUser->branches()->first()->id)
+            ->where('customer_id',$customer->id)
+            ->where('status',0)
+            ->where('is_cancel',false)
+            ->get();
+
+        
+        if(count($sale) > 0)
+        {
+            $response = [
+                'status' => true,
+                'sale' => $sale
+            ];
+        }
+        else
+        {
+            $response = [
+                'status' => false
+            ];
+        }
+
+        return $response;
     }
 
 }
