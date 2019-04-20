@@ -34,17 +34,16 @@
   </div>
 </a>
 <div class="divider"></div>
-<!-- <a href="{{ route('admin.editunclaimed') }}"> -->
-<a href="#">
-  <div class="section">
-    <h5>Manage Unclaimed Service Attach to Plate No</h5>
-  </div>
-</a>
-<div class="divider"></div>
 <!-- <a href="{{ route('admin.searchtransaction') }}"> -->
 <a href="#">
   <div class="section">
     <h5>Search Transaction to Edit/Remove</h5>
+  </div>
+</a>
+<div class="divider"></div>
+<a href="{{ route('unclaimed.index') }}">
+  <div class="section">
+    <h5>Manage Unclaimed Service Attach to Plate No</h5>
   </div>
 </a>
 <div class="divider"></div>

@@ -18,7 +18,7 @@
         <td style="visibility:hidden;"><a href="{{ route('services.listpromotions') }}">Promotion</a></td>
       <tr>
       </tr>
-        <td style="visibility:hidden;"><a href="{{ route('services.listunclaimed') }}">Claim Unclaimed Services</a></td>
+        <td><a href="{{ route('unclaimed.list',['customer' => $customer->id]) }}">Claim Unclaimed Services</a></td>
       </tr>
       <tr>
         <td style="visibility:hidden;"><a href="{{ route('services.giftcredits') }}">Gift Credits</a></td>

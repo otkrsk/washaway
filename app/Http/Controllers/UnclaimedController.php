@@ -16,17 +16,13 @@ class UnclaimedController extends Controller
     public function search(Request $request)
     {
         $customer = isset($request->contact_no) ? Customer::where('contact_no','like',$request->contact_no)->where('is_member',true)->first() : Customer::where('plate_no','like',$request->plate_no)->where('is_member',true)->first(); 
+
         if(!$customer)
         {
             return back()->with('error', 'No Membership Found');
         }
 
         $unclaimed = Unclaimed::where('customer_id',$customer->id)->get();
-        // $unclaimed = Unclaimed::whereHas('customers', function($query) use ($customer) {
-        //     $query->where('customer_id',$customer->id);
-        // })->get();
-
-        // dd($unclaimed);
 
         if($request->search_type == "member")
         {
@@ -46,7 +42,7 @@ class UnclaimedController extends Controller
      */
     public function index()
     {
-        //
+        dd('UnclaimedController@index');
     }
 
     /**
@@ -56,7 +52,7 @@ class UnclaimedController extends Controller
      */
     public function create()
     {
-        //
+        dd('UnclaimedController@create');
     }
 
     /**
@@ -71,12 +67,24 @@ class UnclaimedController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * display the specified resource.
      *
-     * @param  \App\Unclaimed  $unclaimed
-     * @return \Illuminate\Http\Response
+     * @param  \app\unclaimed  $unclaimed
+     * @return \illuminate\http\response
      */
-    public function show(Unclaimed $unclaimed)
+    public function list(Customer $customer)
+    {
+        // dd($customer->unclaimed->first()->menuitems);
+        return view('unclaimed.list',compact('customer'));
+    }
+
+    /**
+     * display the specified resource.
+     *
+     * @param  \app\unclaimed  $unclaimed
+     * @return \illuminate\http\response
+     */
+    public function show(unclaimed $unclaimed)
     {
         //
     }

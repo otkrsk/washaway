@@ -90,6 +90,7 @@ Route::get('/customers/{customer}/addservice', 'CustomerController@addservice_st
 Route::post('/customers/search', 'CustomerController@search_stub')->name('customers.search');
 Route::resource('customers', 'CustomerController');
 
+Route::get('/unclaimed/{customer}/list', 'UnclaimedController@list')->name('unclaimed.list');
 Route::post('/unclaimed/search', 'UnclaimedController@search')->name('unclaimed.search');
 Route::resource('unclaimed', 'UnclaimedController');
 
