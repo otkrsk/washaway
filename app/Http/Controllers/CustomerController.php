@@ -92,12 +92,16 @@ class CustomerController extends Controller
 
         if($sale)
         {
+            $sum = 0;
             $menuitems = $sale->menuitems;
-            return view('customers.addservices',compact('customer','menuitems','sale'));
+
+            foreach($menuitems as $menuitem) $sales_total[] = ($customer->is_member) ? $menuitem->prices()->first()->member_price : $menuitem->prices()->first()->normal_price;
+            foreach($sales_total as $st) $sum += $st;
+
+            return view('customers.addservices',compact('customer','menuitems','sale','sum'));
         }
         else
         {
-            // dd('no sale yet');
             return view('customers.addnewservices',compact('customer'));
         }
 

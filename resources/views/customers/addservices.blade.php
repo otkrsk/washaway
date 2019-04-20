@@ -19,9 +19,17 @@
       @foreach($menuitems as $menuitem)
         <tr>
           <td>{{ $menuitem->name }}</td>
+          <td>RM{{ ($customer->is_member) ? $menuitem->prices()->first()->member_price : $menuitem->prices()->first()->normal_price }}</td>
           <td><a href='{{ route("sales.removeservice", ["id" => $customer->id, "sale" => $sale->id, "item" => $menuitem->id]) }}' class='waves-effect waves-light btn'>X</a></td>
         </tr>
       @endforeach
+      <tr>
+        <td>&nbsp;</td>
+
+        <td>TOTAL RM{{ money_format("%.2n",$sum) }}</td>
+
+        <td>&nbsp;</td>
+      </tr>
     </tbody>
   </table>
 </div>

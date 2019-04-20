@@ -52,9 +52,17 @@ class SaleController extends Controller
             ->where('customer_id',$customer->id)
             ->where('status',0)
             ->where('is_cancel',false)
-            ->get();
+            ->first();
 
         if(count($sale) > 0) {
+            $check_relationship = Sale::whereHas('menuitems', function($q) use ($menuItem) {
+                $q->where('id',$menuItem->id);
+            })->where('id',$sale->id)->get();
+
+            if(count($check_relationship) > 0) {
+                return back()->with('error', $menuItem->name . ' Has Already Been Added');
+            }
+
             $menuItem->sales()->attach($sale);
             return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
         }

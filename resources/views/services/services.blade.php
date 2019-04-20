@@ -4,6 +4,9 @@
 
 <div class="row">
   <h3>Services</h3>
+  @if($message = Session::get('error'))
+  <strong style="color:red;">{{ $message }}</strong>
+  @endif
 </div>
 
 <div class="row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\MenuItem;
+use App\Sale;
 use App\Unclaimed;
 use Illuminate\Http\Request;
 
@@ -67,7 +68,7 @@ class UnclaimedController extends Controller
     {
         if(is_null($request->menu_item))
         {
-            return back()->with('error', 'No Service Selected');
+            return back()->with('error', 'No Service Was Selected');
         }
 
         $menuItems = $request->menu_item;
@@ -93,7 +94,31 @@ class UnclaimedController extends Controller
         }
 
         $sale = $hasSale['sale'][0];
-        foreach($menuItem as $mi) $mi->sales()->attach($sale);
+        foreach($menuItem as $mi)
+        {
+            $check_relationship = Sale::whereHas('menuitems', function($q) use ($mi) {
+                $q->where('id',$mi->id);
+            })->where('id',$sale->id)->get();
+
+            if(count($check_relationship) > 0) {
+                $error_msg[] = $mi->name;
+            }
+            else
+            {
+                $mi->sales()->attach($sale);
+            }
+        }
+
+        if(count($error_msg) > 0)
+        {
+            $message = "";
+            $last = end($error_msg);
+            foreach($error_msg as $em)
+            {
+                $message .= ($em == $last) ? $em . " " : $em . ", ";
+            }
+            return back()->with('error', "The Service(s) " . $message . " Has Already Been Added");
+        }
 
         return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
 

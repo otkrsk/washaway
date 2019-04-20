@@ -20,7 +20,7 @@
 
       @if($i == 1)
       </tr>
-        <td style="visibility:hidden;"><a href="{{ route('services.listpromotions') }}">Promotion</a></td>
+        <td><a href="{{ route('services.listpromotions') }}">Promotion</a></td>
       <tr>
       @endif
 
