@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Customercar;
 use App\MenuItem;
 use App\Sale;
 use Illuminate\Http\Request;
@@ -55,7 +56,8 @@ class SaleController extends Controller
      */
     public function transactions()
     {
-        $sales = Sale::where('is_cancel',false)->get();
+        $sales = Sale::where('is_cancel',false)
+            ->orderBy('status','desc')->get();
         $sum = 0;
         
         foreach($sales as $sale)
@@ -91,7 +93,7 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function new(Customer $customer, $id)
+    public function new(Customer $customer, $id, $flag = null)
     {
         $menuItem = MenuItem::findOrFail($id);
 
@@ -111,7 +113,15 @@ class SaleController extends Controller
             }
 
             $menuItem->sales()->attach($sale);
-            return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
+
+            if($flag)
+            {
+                return redirect()->action('SaleController@edit', ['sale' => $sale]);
+            }
+            else
+            {
+                return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
+            }
         }
         else
         {
@@ -189,7 +199,7 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function remove_service(Customer $customer, Sale $sale, $id)
+    public function remove_service(Customer $customer, Sale $sale, $id, $flag = null)
     {
         $menuitems = $sale->menuitems;
         $menuItem = MenuItem::findOrFail($id);
@@ -197,7 +207,14 @@ class SaleController extends Controller
         $menuItem->sales()->detach($sale);
 
         // return view('customers.addservices',compact('customer','menuitems','sale'));
-        return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
+        if($flag)
+        {
+            return redirect()->action('SaleController@edit', ['sale' => $sale]);
+        }
+        else
+        {
+            return redirect()->action('CustomerController@addservice_stub', ['customer' => $customer]);
+        }
     }
 
     /**
@@ -218,7 +235,22 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        //
+        $customer = $sale->customers->first();
+        $member_status = ($customer->is_member) ? "Member" : "Walk-In";
+        $car = Customercar::where('plate_no','like',$customer->plate_no)->first();
+
+        // dd($car->sales()->where('is_cancel',false)->get(['sales_total']));
+
+        // $sales = $car->sales()->where('is_cancel',false)->get(['sales_total']);
+        // $car->sales()->where('is_cancel',false)->get(['sales_total'])
+        // $sales_total = 0;
+
+        return view('sales.show',compact(
+            'customer',
+            'member_status',
+            'sale',
+            'car'
+        ));
     }
 
     /**
@@ -229,7 +261,8 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        //
+        // dd($sale->menuitems);
+        return view('sales.edit',compact('sale'));
     }
 
     /**

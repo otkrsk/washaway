@@ -21,7 +21,7 @@
           <td>{{ $sale->customers->first()->plate_no }}</td>
           <td>{{ $sale->customers->first()->cars()->first()->brand()->first()->name }}</td>
           <td>RM{{ $sale->sales_total }}</td>
-          <td>{{ ($sale->status == 2) ? "Paid" : (($sale->status == 1) ? "Pending" : "Ongoing") }}</td>
+          <td><a href="{{ route('sales.show', ['sale' => $sale]) }}">{{ ($sale->status == 2) ? "Paid" : (($sale->status == 1) ? "Pending" : "Ongoing") }}</a></td>
         </tr>
       @endforeach
 
