@@ -12,23 +12,23 @@
     </tr>
     <tr>
       <td>Total Cars</td>
-      <td>{{ $total_sales }}</td>
+      <td>{{ "TBD" }}</td>
     </tr>
     <tr>
       <td>Non-Member</td>
-      <td>{{ $total_sales }}</td>
+      <td>{{ "TBD" }}</td>
     </tr>
     <tr>
       <td>Member</td>
-      <td>{{ $total_sales }}</td>
+      <td>{{ "TBD" }}</td>
     </tr>
     <tr>
       <td>Total Service</td>
-      <td>{{ $total_sales }}</td>
+      <td>{{ "TBD" }}</td>
     </tr>
     <tr>
       <td>Total New/Renew Member</td>
-      <td>{{ $total_sales }}</td>
+      <td>{{ "TBD" }}</td>
     </tr>
     <tr>
       <td>Total Pending</td>

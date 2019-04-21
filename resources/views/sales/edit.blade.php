@@ -29,7 +29,7 @@
       </tr>
 
       <tr>
-        <td colspan="3"><a href='#' class='waves-effect waves-light btn'>Confirm Edit</a></td>
+        <td colspan="3"><a href='{{ route("home") }}' class='waves-effect waves-light btn'>Confirm Edit</a></td>
       </tr>
 
     </tbody>

@@ -8,7 +8,7 @@
 
 <?php $i = 0; ?>
 
-@if($sale)
+@if(isset($sale))
   @include('partials._editsale')
 @else
   @include('partials._addservicelist')

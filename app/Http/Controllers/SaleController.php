@@ -206,7 +206,8 @@ class SaleController extends Controller
 
         $menuItem->sales()->detach($sale);
 
-        // return view('customers.addservices',compact('customer','menuitems','sale'));
+        Sale::update_sales_total($customer,$sale);
+
         if($flag)
         {
             return redirect()->action('SaleController@edit', ['sale' => $sale]);

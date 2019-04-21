@@ -95,8 +95,12 @@ class CustomerController extends Controller
             $sum = 0;
             $menuitems = $sale->menuitems;
 
-            foreach($menuitems as $menuitem) $sales_total[] = ($customer->is_member) ? $menuitem->prices()->first()->member_price : $menuitem->prices()->first()->normal_price;
-            foreach($sales_total as $st) $sum += $st;
+            if(count($menuitems) > 0)
+            {
+                foreach($menuitems as $menuitem) $sales_total[] = ($customer->is_member) ? $menuitem->prices()->first()->member_price : $menuitem->prices()->first()->normal_price;
+                foreach($sales_total as $st) $sum += $st;
+                Sale::update_sales_total($customer, $sale);
+            }
 
             return view('customers.addservices',compact('customer','menuitems','sale','sum'));
         }
