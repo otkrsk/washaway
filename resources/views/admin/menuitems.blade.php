@@ -28,6 +28,12 @@
   </div>
 </a>
 <div class="divider"></div>
+<a href="{{ route('admin.editpromotions') }}">
+  <div class="section">
+    <h5>Manage Promotions</h5>
+  </div>
+</a>
+<div class="divider"></div>
 <a href="{{ route('admin.editpayment') }}">
   <div class="section">
     <h5>Manage Payment Type</h5>

@@ -130,6 +130,11 @@ class AdminController extends Controller
         return view('admin.editbranches', compact('branches'));
     }
 
+    public function editPromotions()
+    {
+        return redirect()->action('PromotionController@index');
+    }
+
     public function searchTransaction()
     {
         return view('admin.searchtransaction');

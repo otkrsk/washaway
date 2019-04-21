@@ -29,7 +29,6 @@ class MenuController extends Controller
     public function create()
     {
         $branches = Branch::get();
-        // dd($branches);
 
         return view('menus.create',compact('branches'));
     }

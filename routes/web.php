@@ -97,6 +97,8 @@ Route::post('/unclaimed/{customer}/add', 'UnclaimedController@add')->name('uncla
 Route::post('/unclaimed/search', 'UnclaimedController@search')->name('unclaimed.search');
 Route::resource('unclaimed', 'UnclaimedController');
 
+Route::resource('promotions', 'PromotionController');
+
 Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
     Route::get('/index', 'AdminController@showMenuItems')->name('admin.index');
 
@@ -114,6 +116,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::get('/edit/members', 'AdminController@editMembers')->name('admin.editmembers');
     Route::get('/edit/branches', 'AdminController@editBranches')->name('admin.editbranches');
+
+    Route::get('/edit/promotions', 'AdminController@editPromotions')->name('admin.editpromotions');
 
     Route::get('/transaction/search', 'AdminController@searchTransaction')->name('admin.searchtransaction');
 });
