@@ -17,7 +17,7 @@
       @endforeach
 
       <tr>
-        <td colspan="3"><a href='{{ route("customers.addservicelist", ["customer" => $sale->customers->first()->id]) }}' class='waves-effect waves-light btn'>Add Service</a></td>
+        <td colspan="3"><a href='{{ route("customers.addservicelist", ["customer" => $sale->customers->first()->id,"sale" => $sale]) }}' class='waves-effect waves-light btn'>Add Service</a></td>
       </tr>
 
       <tr>
