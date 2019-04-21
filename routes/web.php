@@ -63,6 +63,8 @@ Route::get('/sales/{sale}/cancel', 'SaleController@cancel')->name('sales.cancel'
 Route::get('/sales/{sale}/submit', 'SaleController@submit')->name('sales.submit');
 Route::get('/sales/remove/{customer}/{sale}/{item}', 'SaleController@remove_service')->name('sales.removeservice');
 Route::get('/sales/new/{customer}/{item}', 'SaleController@new')->name('sales.new');
+Route::get('/sales/summary', 'SaleController@summary')->name('sales.summary');
+Route::get('/sales/transactions', 'SaleController@transactions')->name('sales.transactions');
 Route::resource('sales', 'SaleController');
 
 Route::get('/memberships/new/{customer}/{item}', 'MembershipController@new')->name('memberships.new');

@@ -20,6 +20,53 @@ class SaleController extends Controller
     }
 
     /**
+     * Display Sales Summary.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function summary()
+    {
+        $sales = Sale::where('is_cancel',false)->get();
+        $total_sales = count($sales);
+        $total_pending = count(Sale::where('is_cancel',false)->where('status',1)->get());
+        $total_paid = count(Sale::where('is_cancel',false)->where('status',2)->get());
+
+        // $total_sales = Sale::where('is_cancel',false)->where('status',2)->get();
+
+        $sum = 0;
+        
+        foreach($sales as $sale)
+        {
+            $sum += $sale->sales_total;
+        }
+
+        return view('sales.summary',compact(
+            'total_sales',
+            'total_pending',
+            'total_paid',
+            'sum'
+        ));
+    }
+
+    /**
+     * Display List of Transactions for the Day.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function transactions()
+    {
+        $sales = Sale::where('is_cancel',false)->get();
+        $sum = 0;
+        
+        foreach($sales as $sale)
+        {
+            $sum += $sale->sales_total;
+        }
+
+        return view('sales.transactions',compact('sales','sum'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -42,7 +42,25 @@
   </li>
   <li>
     <div class="collapsible-header"><i class="material-icons">date_range</i>Today Sales</div>
-    <div class="collapsible-body"><span>&nbsp;</span></div>
+    <div class="collapsible-body">
+      <a href="{{ route('sales.summary') }}">
+        <div class="section">
+          <h6>Sales Summary</h6>
+        </div>
+      </a>
+      <div class="divider"></div>
+      <a href="{{ route('sales.transactions') }}">
+        <div class="section">
+          <h6>Transaction</h6>
+        </div>
+      </a>
+      <div class="divider"></div>
+      <a href="{{ route('admin.editmenu') }}">
+        <div class="section">
+          <h6>Close Today Sales</h6>
+        </div>
+      </a>
+    </div>
   </li>
 </ul>
 
