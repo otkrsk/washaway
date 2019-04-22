@@ -21,7 +21,7 @@
       @foreach($menus as $menu)
         <tr>
           <td><a href="{{ route('menus.show', ['id' => $menu->id]) }}">{{ $menu->name }}</a></td>
-          <td>{{ $menu->branches->first()->name }}</td>
+          <td>{{ ($menu->id == 6) ? "-" : $menu->branches->first()->name }}</td>
         </tr>
       @endforeach
     </tbody>
