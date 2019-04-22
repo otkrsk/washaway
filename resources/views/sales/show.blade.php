@@ -62,12 +62,12 @@
       </tr>
 
       <tr>
-        <td><a href='#' class='waves-effect waves-light btn'>Cancel Sales</a></td>
+        <td><a href='{{ route("sales.cancel", ["sale" => $sale]) }}' class='waves-effect waves-light btn'>Cancel Sales</a></td>
         <td><a href='{{ route("sales.edit", ["sale" => $sale]) }}' class='waves-effect waves-light btn'>Edit Services</a></td>
       </tr>
 
       <tr>
-        <td colspan="2"><a href='#' class='waves-effect waves-light btn'>Print Receipt</a></td>
+        <td colspan="2"><a href='#' class='disabled waves-effect waves-light btn'>Print Receipt</a></td>
       </tr>
 
     </tbody>
