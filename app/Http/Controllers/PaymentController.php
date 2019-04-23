@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
+use App\Membership;
+use App\MenuItem;
 use App\Payment;
 use App\Sale;
 
@@ -132,17 +135,34 @@ class PaymentController extends Controller
         $sale->status = 2;
         $sale->save();
 
-        // If there is a Member Subscription present, need to update Customer status from Walk-In to Member
         /**
          * 1. Check if Member Subscription is present
          */
 
-        // $m = Membership::create([                                                                                                                                                                                                           
-        //     'customer_id' => $c->id,
-        //     'membership_type'=>1,
-        //     'membership_expires'=>date('Y-m-d H:i:s',strtotime('+1 year')),                                                                                                                            
-        //     'is_expired' => false
-        // ]);
+        foreach($sale->menuitems as $menuitem)
+        {
+            if($menuitem->product_type == 2 || $menuitem->product_type == 3)
+            {
+                /**
+                 * 2. Create the Membership object
+                 */
+
+                $customer = Customer::find($sale->customers->first()->id);
+                $membership = Membership::create([                                                                                                                                                                                                           
+                    'customer_id' => $customer->id,
+                    'membership_type'=> $menuitem->membertype->first()->id,
+                    'membership_expires'=> MenuItem::get_membership_duration($menuitem),
+                    'is_expired' => false
+                ]);
+
+                /**
+                 * 3. Convert the Customer to Member
+                 */
+                $customer->is_member = true;
+                $customer->save();
+            }
+        }
+
 
         return redirect()->action('HomeController@index');
     }

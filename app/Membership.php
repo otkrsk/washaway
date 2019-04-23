@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Sale;
+use App\MenuItem;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Membership extends Model
@@ -17,5 +20,4 @@ class Membership extends Model
     {
         return $this->belongsTo(Customer::class);
     }
-
 }

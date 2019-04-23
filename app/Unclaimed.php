@@ -28,4 +28,9 @@ class Unclaimed extends Model
         return $this->belongsToMany(MenuItem::class);
     }
 
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class);
+    }
+
 }

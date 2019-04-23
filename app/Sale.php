@@ -37,6 +37,11 @@ class Sale extends Model
         return $this->belongsToMany(MenuItem::class);
     }
 
+    public function unclaimed()
+    {
+        return $this->belongsToMany(Unclaimed::class);
+    }
+
     public static function update_sales_total(Customer $customer, Sale $sale)
     {
         $menuitems = $sale->menuitems;

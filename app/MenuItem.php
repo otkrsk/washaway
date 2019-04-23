@@ -15,6 +15,11 @@ class MenuItem extends Model
         'menu_id', 'name', 'product_type'
     ];
 
+
+    // ==================================
+    // List of all Relationships
+    // ==================================
+
     public function menu()
     {
         return $this->belongsToMany(Menu::class);
@@ -33,5 +38,27 @@ class MenuItem extends Model
     public function unclaimed()
     {
         return $this->hasMany(Unclaim::class);
+    }
+
+    public function membertype()
+    {
+        return $this->hasMany(MemberType::class);
+    }
+
+
+    // ==================================
+    // List of all Functions
+    // ==================================
+
+    public static function get_membership_duration(MenuItem $menuitem)
+    {
+        $duration = '+' . $menuitem->membertype->first()->length . ' year';
+        return date('Y-m-d H:i:s',strtotime($duration));
+    }
+
+    public static function get_membership_type(MenuItem $menuitem)
+    {
+        $duration = '+' . $menuitem->membertype->first()->length . ' year';
+        return date('Y-m-d H:i:s',strtotime($duration));
     }
 }
