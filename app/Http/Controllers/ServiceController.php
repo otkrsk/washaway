@@ -92,11 +92,26 @@ class ServiceController extends Controller
         //
     }
 
-    public function listServices(Customer $customer, Sale $sale = null)
+    public function listCategories(Customer $customer, Sale $sale = null)
     {
-        // dd($sale);
         $services = Menu::where('branch_id', $customer->branch_id)->first();
         $menuitems = $services->menuitems;
+
+        if($sale)
+        {
+            return view('services.categories',compact('menuitems','customer','sale'));
+        }
+        else
+        {
+            return view('services.categories',compact('menuitems','customer'));
+        }
+    }
+
+    public function listServices(Customer $customer, $product_type, Sale $sale = null)
+    {
+        $services = Menu::where('branch_id', $customer->branch_id)->first();
+        $menuitems = $services->menuitems->where('product_type',$product_type);
+        // dd($menuitems);
 
         if($sale)
         {

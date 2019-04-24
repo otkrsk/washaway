@@ -2,7 +2,7 @@
   <table>
     <tbody>
       <tr>
-        <td><a href="{{ route('services.listservices', ['id' => $customer->id]) }}">Services</a></td>
+        <td><a href="{{ route('services.listcategories', ['id' => $customer->id]) }}">Services</a></td>
       </tr>
       <tr>
         <td><a href="{{ route('services.listmemberships', ['id' => $customer->id]) }}">Membership</a></td>

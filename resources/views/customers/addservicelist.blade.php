@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-  <h3>Select Service Category</h3>
+  <h3>Select Service</h3>
 </div>
 
 <?php $i = 0; ?>

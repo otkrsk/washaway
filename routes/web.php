@@ -83,7 +83,8 @@ Route::resource('items', 'MenuItemController');
 
 Route::post('/services/import', 'ServiceController@import')->name('services.import');
 Route::get('/services/import', 'ServiceController@importExportView')->name('services.importexportview');
-Route::get('/services/list/{customer}/services/{sale?}', 'ServiceController@listServices')->name('services.listservices');
+Route::get('/services/list/{customer}/services/categories/{sale?}', 'ServiceController@listCategories')->name('services.listcategories');
+Route::get('/services/list/{customer}/services/{product_type}/{sale?}', 'ServiceController@listServices')->name('services.listservices');
 Route::get('/services/list/{customer}/memberships', 'ServiceController@listMemberships')->name('services.listmemberships');
 Route::get('/services/list/promotions', 'ServiceController@listPromotions')->name('services.listpromotions');
 Route::get('/services/list/unclaimed', 'ServiceController@listUnclaimed')->name('services.listunclaimed');
