@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Menu;
 use App\MenuItem;
+use App\Price;
 use App\Sale;
 use App\Service;
 
@@ -157,7 +158,61 @@ class ServiceController extends Controller
         $import = Excel::toArray(new ServiceImport,request()->file('file'));
 
         // $import = Excel::download(new ServiceImport, 'services.xlsx');
-        dd($import);
+        // dd($import);
+
+        foreach($import as $value)
+        {
+            foreach($value as $v)
+            {
+                // dd($v);
+                // dd((int)$v['type']);
+
+                // 1. Create the MenuItem
+                $menuitem = MenuItem::create([
+                    'menu_id' => 5,
+                    'name' => $v['name'],
+                    'product_type' => (int)$v['type']
+                ]);
+
+                // 2. Create the Sedan Price for the MenuItem
+                // 2a. Create Normal Price for the MenuItem
+                // 2b. Create Member Price for the MenuItem
+
+                $sedanPrice = explode(" ",$v['sedan']);
+                $sedanPrice = $sedanPrice[1];
+
+                $mSedanPrice = explode(" ",$v['msedan']);
+                $mSedanPrice = $mSedanPrice[1];
+
+                $priceSedan = Price::create([
+                    'menu_item_id' => $menuitem->id,
+                    'car_type' => 1,
+                    'normal_price' => $sedanPrice,
+                    'member_price' => $mSedanPrice
+                ]);
+
+                // 3. Create the MPV Price for the MenuItem
+                // 3a. Create Normal Price for the MenuItem
+                // 3b. Create Member Price for the MenuItem
+
+                $mpvPrice = explode(" ",$v['mpv']);
+                $mpvPrice = $mpvPrice[1];
+
+                $mMpvPrice = explode(" ",$v['mmpv']);
+                $mMpvPrice = $mMpvPrice[1];
+
+                $priceMpv = Price::create([
+                    'menu_item_id' => $menuitem->id,
+                    'car_type' => 2,
+                    'normal_price' => $mpvPrice,
+                    'member_price' => $mMpvPrice
+                ]);
+
+                $priceMpv->menuitems()->attach($menuitem);
+                $priceSedan->menuitems()->attach($menuitem);
+
+            }
+        }
 
            
         return back();
