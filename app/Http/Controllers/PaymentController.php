@@ -6,6 +6,7 @@ use App\Customer;
 use App\Membership;
 use App\MenuItem;
 use App\Payment;
+use App\PaymentType;
 use App\Sale;
 
 use Illuminate\Http\Request;
@@ -103,7 +104,10 @@ class PaymentController extends Controller
         $customer_is_member = $customer->is_member;
 
         $menuitems = $sale->menuitems;
-        return view('payments.confirm',compact('sale','menuitems','customer_is_member'));
+
+        $payment_types = PaymentType::pluck('name','id')->toArray();
+
+        return view('payments.confirm',compact('sale','menuitems','customer_is_member','payment_types'));
     }
 
     /**
@@ -112,8 +116,13 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function pay(Sale $sale)
+    public function pay(Request $request, Sale $sale)
     {
+        if($request->payment_type[1] == null && $request->payment_type[2] == null)
+        {
+            return back()->with('error', 'Please Choose a Payment Type');
+        }
+
         /**
          * 1. Create Payment Object
          * 2. Generate Receipt No.
@@ -128,7 +137,7 @@ class PaymentController extends Controller
             'total' => $sale->sales_total,
             'receipt_no' => $receipt_no,
             'paid_time' => date('Y-m-d H:i:s'),
-            'payment_method' => 1,
+            'payment_method' => json_encode($request->payment_type),
             'status' => 1
         ]);
 
