@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Membership;
 use App\MenuItem;
 use App\Sale;
 use App\Unclaimed;
@@ -44,7 +45,8 @@ class UnclaimedController extends Controller
      */
     public function index()
     {
-        dd('UnclaimedController@index');
+        $members = Membership::get();
+        return view('unclaimed.index',compact('members'));
     }
 
     /**
@@ -164,9 +166,26 @@ class UnclaimedController extends Controller
      * @param  \App\Unclaimed  $unclaimed
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unclaimed $unclaimed)
+    // public function edit(Unclaimed $unclaimed)
+    public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer_unclaimed = $customer->unclaimed;
+        // dd($customer_unclaimed);
+
+        foreach($customer_unclaimed as $unclaimed)
+        {
+            $customer_unclaimed_ids[] = $unclaimed->id;
+        }
+
+        // dd($customer_unclaimed_ids);
+
+        $services = MenuItem::where('product_type',1)
+            ->whereNotIn('id',$customer_unclaimed_ids)->get();
+
+        $service_plucked = $services->pluck('name','id')->toArray();
+
+        return view('unclaimed.edit',compact('customer','services','service_plucked'));
     }
 
     /**
@@ -178,7 +197,7 @@ class UnclaimedController extends Controller
      */
     public function update(Request $request, Unclaimed $unclaimed)
     {
-        //
+        dd($request->request);
     }
 
     /**

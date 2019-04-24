@@ -53,12 +53,5 @@
   </div>
 </a>
 <div class="divider"></div>
-<!-- <a href="{{ route('admin.editfreeunclaimed') }}"> -->
-<a href="#">
-  <div class="section">
-    <h5>Edit Membership's Free Unclaimed Services</h5>
-  </div>
-</a>
-<div class="divider"></div>
 
 @endsection
