@@ -166,10 +166,11 @@ class ServiceController extends Controller
             {
                 // dd($v);
                 // dd((int)$v['type']);
+                $menu = Menu::find(5);
 
                 // 1. Create the MenuItem
                 $menuitem = MenuItem::create([
-                    'menu_id' => 5,
+                    'menu_id' => $menu->id,
                     'name' => $v['name'],
                     'product_type' => (int)$v['type']
                 ]);
@@ -210,6 +211,7 @@ class ServiceController extends Controller
 
                 $priceMpv->menuitems()->attach($menuitem);
                 $priceSedan->menuitems()->attach($menuitem);
+                $menuitem->menu()->attach($menu);
 
             }
         }
