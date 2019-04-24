@@ -44,17 +44,17 @@
 
       <tr>
         <td>Paid Time</td>
-        <td>N/A</td>
+        <td>{{ $paid_time }}</td>
       </tr>
 
       <tr>
         <td>Payment Method</td>
-        <td>N/A</td>
+        <td>{{ $payment_method }}</td>
       </tr>
 
       <tr>
         <td>Receipt No.</td>
-        <td>N/A</td>
+        <td>{{ $receipt_no }}</td>
       </tr>
 
       <tr>

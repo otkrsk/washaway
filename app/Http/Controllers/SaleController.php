@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Customercar;
 use App\MenuItem;
+use App\Payment;
 use App\Sale;
 use Illuminate\Http\Request;
 
@@ -27,10 +28,13 @@ class SaleController extends Controller
      */
     public function summary()
     {
-        $sales = Sale::where('is_cancel',false)->get();
+        $sales = Sale::where('created_at','>',date('Y-m-d') . ' 00:00:00')
+            ->where('is_cancel',false)
+            ->get();
+
         $total_sales = count($sales);
-        $total_pending = count(Sale::where('is_cancel',false)->where('status',1)->get());
-        $total_paid = count(Sale::where('is_cancel',false)->where('status',2)->get());
+        $total_pending = count(Sale::where('created_at','>',date('Y-m-d') . ' 00:00:00')->where('is_cancel',false)->where('status',1)->get());
+        $total_paid = count(Sale::where('created_at','>',date('Y-m-d') . ' 00:00:00')->where('is_cancel',false)->where('status',2)->get());
 
         // $total_sales = Sale::where('is_cancel',false)->where('status',2)->get();
 
@@ -57,6 +61,7 @@ class SaleController extends Controller
     public function transactions()
     {
         $sales = Sale::where('is_cancel',false)
+            ->where('created_at','>',date('Y-m-d') . ' 00:00:00')
             ->orderBy('status','desc')->get();
         $sum = 0;
         
@@ -253,13 +258,19 @@ class SaleController extends Controller
         $member_status = ($customer->is_member) ? "Member" : "Walk-In";
         $car = Customercar::where('plate_no','like',$customer->plate_no)->first();
 
-        // dd($car->sales()->where('is_cancel',false)->get(['sales_total']));
+        $payment = Payment::where('sale_id',$sale->id)->first();
+        // dd($payment);
 
-        // $sales = $car->sales()->where('is_cancel',false)->get(['sales_total']);
-        // $car->sales()->where('is_cancel',false)->get(['sales_total'])
-        // $sales_total = 0;
+
+        $paid_time = ($payment) ? date('H:i:s',strtotime($payment->paid_time)) : "N/A";
+        // $payment_method = ($payment) ? $payment->paid_time : "N/A";
+        $payment_method = "N/A";
+        $receipt_no = ($payment) ? $payment->receipt_no : "N/A";
 
         return view('sales.show',compact(
+            'paid_time',
+            'payment_method',
+            'receipt_no',
             'customer',
             'member_status',
             'sale',
