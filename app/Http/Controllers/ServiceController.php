@@ -7,6 +7,10 @@ use App\Menu;
 use App\MenuItem;
 use App\Sale;
 use App\Service;
+
+use App\Imports\ServiceImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -124,5 +128,38 @@ class ServiceController extends Controller
     public function giftCredits()
     {
         return view('services.giftcredits');
+    }
+    
+    
+    
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function importExportView()
+    {
+        return view('import');
+    }
+   
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function export() 
+    {
+
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+   
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function import() 
+    {
+        $import = Excel::toArray(new ServiceImport,request()->file('file'));
+
+        // $import = Excel::download(new ServiceImport, 'services.xlsx');
+        dd($import);
+
+           
+        return back();
     }
 }
