@@ -186,7 +186,7 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        //
+        dd($payment);
     }
 
     /**

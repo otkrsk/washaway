@@ -44,18 +44,21 @@ class Sale extends Model
 
     public static function update_sales_total(Customer $customer, Sale $sale)
     {
-        $menuitems = $sale->menuitems;
-
-        foreach($menuitems as $menuitem)
-        {
-            $sales_total[] = ($customer->is_member) ? $menuitem->prices()->first()->member_price : $menuitem->prices()->first()->normal_price;
-        }
-
         $sum = 0;
 
-        foreach($sales_total as $st)
+        $menuitems = $sale->menuitems;
+
+        if(count($menuitems) > 0)
         {
-            $sum += $st;
+            foreach($menuitems as $menuitem)
+            {
+                $sales_total[] = ($customer->is_member) ? $menuitem->prices()->first()->member_price : $menuitem->prices()->first()->normal_price;
+            }
+
+            foreach($sales_total as $st)
+            {
+                $sum += $st;
+            }
         }
 
         $sale->sales_total = $sum;

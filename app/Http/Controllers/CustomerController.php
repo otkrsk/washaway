@@ -113,6 +113,7 @@ class CustomerController extends Controller
 
     public function addservicelist_stub(Customer $customer, Sale $sale = null)
     {
+        // dd($sale);
         if($sale)
         {
             // dd($sale);

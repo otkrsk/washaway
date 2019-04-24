@@ -97,11 +97,22 @@ class SaleController extends Controller
     {
         $menuItem = MenuItem::findOrFail($id);
 
-        $sale = Sale::where('user_id',\Auth::user()->branches()->first()->id)
-            ->where('customer_id',$customer->id)
-            ->where('status',0)
-            ->where('is_cancel',false)
-            ->first();
+        if($flag)
+        {
+            $sale = Sale::where('user_id',\Auth::user()->branches()->first()->id)
+                ->where('customer_id',$customer->id)
+                ->where('status',1)
+                ->where('is_cancel',false)
+                ->first();
+        }
+        else
+        {
+            $sale = Sale::where('user_id',\Auth::user()->branches()->first()->id)
+                ->where('customer_id',$customer->id)
+                ->where('status',0)
+                ->where('is_cancel',false)
+                ->first();
+        }
 
         if(count($sale) > 0) {
             $check_relationship = Sale::whereHas('menuitems', function($q) use ($menuItem) {
@@ -113,6 +124,7 @@ class SaleController extends Controller
             }
 
             $menuItem->sales()->attach($sale);
+            $sale->update_sales_total($customer, $sale);
 
             if($flag)
             {
@@ -205,12 +217,13 @@ class SaleController extends Controller
         $menuItem = MenuItem::findOrFail($id);
 
         $menuItem->sales()->detach($sale);
+        $freshSale = $sale->fresh();
 
-        Sale::update_sales_total($customer,$sale);
+        Sale::update_sales_total($customer,$freshSale);
 
         if($flag)
         {
-            return redirect()->action('SaleController@edit', ['sale' => $sale]);
+            return redirect()->action('SaleController@edit', ['sale' => $freshSale]);
         }
         else
         {

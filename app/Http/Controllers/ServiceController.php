@@ -89,6 +89,7 @@ class ServiceController extends Controller
 
     public function listServices(Customer $customer, Sale $sale = null)
     {
+        // dd($sale);
         $services = Menu::where('branch_id', $customer->branch_id)->first();
         $menuitems = $services->menuitems;
 

@@ -62,7 +62,7 @@
 
       <tr>
         <td><a href='{{ route("sales.cancel", ["sale" => $sale]) }}' class='waves-effect waves-light btn'>Cancel Sales</a></td>
-        <td><a href='#' class='waves-effect waves-light btn'>Edit Services</a></td>
+        <td><a href='{{ route("sales.edit", ["sale" => $sale]) }}' class='waves-effect waves-light btn'>Edit Services</a></td>
       </tr>
 
       <tr>

@@ -25,7 +25,7 @@
             <td>{{ $menuitem->name }}</td>
             <td>{{ $menuitem->prices->first()->normal_price }}</td>
             <td>{{ $menuitem->prices->first()->member_price }}</td>
-            <td><a href='{{ route("sales.new", ["customer" => $customer->id, "item" => $menuitem->id]) }}' class='waves-effect waves-light btn'>Add</a></td>
+            <td><a href='{{ route("sales.new", ["customer" => $customer->id, "item" => $menuitem->id, "flag" => 1]) }}' class='waves-effect waves-light btn'>Add</a></td>
           @endif
         </tr>
       @endforeach
