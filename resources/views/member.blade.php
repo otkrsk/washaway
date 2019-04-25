@@ -4,12 +4,18 @@
 <h3>MEMBER</h3>
 
 <ul class="collapsible">
+
+  @if ($message = Session::get('error_unclaimed_search'))
+  <li>
+  @else
   <li class="active">
+  @endif
+
     <div class="collapsible-header"><i class="material-icons">search</i>Member Search</div>
     <div class="collapsible-body">
       <span>Member Search</span>
 
-      @if ($message = Session::get('error'))
+      @if ($message = Session::get('error_member_search'))
         <div class="alert alert-danger alert-block">
           <strong style="color:red;">{{ $message }}</strong>
         </div>
@@ -44,11 +50,21 @@
     </div>
 
   </li>
-  <!-- <li class="active"> -->
+
+  @if ($message = Session::get('error_unclaimed_search'))
+  <li class="active">
+  @else
   <li>
+  @endif
 
     <div class="collapsible-header"><i class="material-icons">stars</i>Unclaimed Services</div>
     <div class="collapsible-body">
+
+      @if ($message = Session::get('error_unclaimed_search'))
+        <div class="alert alert-danger alert-block">
+          <strong style="color:red;">{{ $message }}</strong>
+        </div>
+      @endif
 
       <form method="POST" action="{{ route('unclaimed.search') }}" class="col s12">
 

@@ -18,6 +18,18 @@ class UnclaimedController extends Controller
      */
     public function search(Request $request)
     {
+        // dd($request->request);
+        $search_type = $request->search_type;
+
+        if(is_null($request->contact_no) && is_null($request->plate_no))
+        {
+            if($search_type == 'member')
+                return back()->with('error_member_search', 'Please Enter Plate No. OR Contact No.');
+
+            if($request->search_type == 'unclaimed')
+                return back()->with('error_unclaimed_search', 'Please Enter Plate No. OR Contact No.');
+        }
+
         $customer = isset($request->contact_no) ? Customer::where('contact_no','like',$request->contact_no)->where('is_member',true)->first() : Customer::where('plate_no','like',$request->plate_no)->where('is_member',true)->first(); 
 
         if(!$customer)
