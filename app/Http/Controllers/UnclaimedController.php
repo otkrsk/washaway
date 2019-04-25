@@ -243,8 +243,7 @@ class UnclaimedController extends Controller
             if(is_null($id) || is_null($quantity))
                 continue;
 
-            // we need to check if rel already exists
-            // FIXME: this is not working
+            // Check for Relationship
             $menuitem = MenuItem::find($id);
 
             $check_relationship = Unclaimed::whereHas('menuitems', function($q) use ($menuitem) {
