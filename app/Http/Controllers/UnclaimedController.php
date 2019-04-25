@@ -192,12 +192,53 @@ class UnclaimedController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Unclaimed  $unclaimed
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unclaimed $unclaimed)
+    public function update(Request $request, Customer $customer)
     {
+        dd($customer);
         dd($request->request);
+    }
+
+    /**
+     * Update the Unclaimed Quantity.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function update_quantity(Request $request, Customer $customer)
+    {
+        // dd($customer);
+        // dd($request->menuitem);
+
+        foreach($request->menuitem as $key => $value)
+        {
+            $unclaimed = Unclaimed::where('id',$key)->where('customer_id',$customer->id)->first();
+            $unclaimed->quantity = (int)$value;
+            $unclaimed->save();
+        }
+        
+        return back()->with('success', 'Quantity Updated Successfully');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Unclaimed  $unclaimed
+     * @param  \App\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_unclaimed(Unclaimed $unclaimed, Customer $customer)
+    {
+        // dd($unclaimed);
+
+        $menuitem = $unclaimed->menuitems->first();
+        $unclaimed->menuitems()->detach($menuitem);
+        $unclaimed->delete();
+
+        return back()->with('success', 'Unclaimed Service Removed Successfully');
     }
 
     /**

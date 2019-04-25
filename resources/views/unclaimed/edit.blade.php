@@ -3,8 +3,6 @@
 @section('content')
 <h3>Edit Member's Unclaimed Services</h3>
 
-{!! Form::open(['route' => ['unclaimed.update', 'id' => $customer->id], 'class' => 'col s12', 'method' => 'PATCH']) !!}
-
 <div class="row">
   <table>
     <tbody>
@@ -18,11 +16,49 @@
         <td colspan="3"><h4>Member's Unclaimed</h4></td>
       </tr>
 
+    </tbody>
+  </table>
+</div>
+
+{!! Form::open(['route' => ['unclaimed.updatequantity', 'customer' => $customer], 'class' => 'col s12', 'method' => 'POST']) !!}
+
+<div class="row">
+  <table>
+    <thead>
       <tr>
-        <td>Jack</td>
-        <td>10</td>
-        <td>REMOVE</td>
+        <th>Service Name</th>
+        <th colspan="2">Quantity</th>
       </tr>
+    </thead>
+    <tbody>
+
+      @foreach($customer->unclaimed as $unclaimed)
+        <tr>
+          <td>{{ $unclaimed->menuitems->first()->name }}</td>
+          <td>
+            <input id="menuitem" name="menuitem[{{ $unclaimed->menuitems->first()->id }}]" type="text" value="{{ $unclaimed->quantity }}">
+          </td>
+          <td>
+            <a href="{{ route('unclaimed.removeunclaimed',['unclaimed' => $unclaimed, 'customer' => $customer]) }}" data-sedan-identifier='1' class='sedan_remove waves-effect waves-light btn'>X</a>
+          </td>
+        </tr>
+      @endforeach
+
+    </tbody>
+  </table>
+
+</div>
+<div class="row">
+  <button type="submit" class="waves-effect waves-light btn-large">Save</button>
+</div>
+
+{!! Form::close() !!}
+
+{!! Form::open(['route' => ['unclaimed.update', 'id' => $customer->id], 'class' => 'col s12', 'method' => 'PATCH']) !!}
+
+<div class="row">
+  <table>
+    <tbody>
 
       <tr>
         <td colspan="3"><h4>Add Services</h4></td>

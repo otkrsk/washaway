@@ -99,6 +99,8 @@ Route::resource('customers', 'CustomerController');
 Route::get('/unclaimed/{customer}/list', 'UnclaimedController@list')->name('unclaimed.list');
 Route::post('/unclaimed/{customer}/add', 'UnclaimedController@add')->name('unclaimed.add');
 Route::post('/unclaimed/search', 'UnclaimedController@search')->name('unclaimed.search');
+Route::post('/unclaimed/update/quantity/{customer}', 'UnclaimedController@update_quantity')->name('unclaimed.updatequantity');
+Route::get('/unclaimed/remove/{unclaimed}/{customer}', 'UnclaimedController@remove_unclaimed')->name('unclaimed.removeunclaimed');
 Route::resource('unclaimed', 'UnclaimedController');
 
 Route::resource('promotions', 'PromotionController');
