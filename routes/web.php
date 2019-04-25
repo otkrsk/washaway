@@ -100,6 +100,7 @@ Route::get('/unclaimed/{customer}/list', 'UnclaimedController@list')->name('uncl
 Route::post('/unclaimed/{customer}/add', 'UnclaimedController@add')->name('unclaimed.add');
 Route::post('/unclaimed/search', 'UnclaimedController@search')->name('unclaimed.search');
 Route::post('/unclaimed/update/quantity/{customer}', 'UnclaimedController@update_quantity')->name('unclaimed.updatequantity');
+Route::post('/unclaimed/add/{customer}', 'UnclaimedController@add_unclaimed')->name('unclaimed.addunclaimed');
 Route::get('/unclaimed/remove/{unclaimed}/{customer}', 'UnclaimedController@remove_unclaimed')->name('unclaimed.removeunclaimed');
 Route::resource('unclaimed', 'UnclaimedController');
 

@@ -215,12 +215,56 @@ class UnclaimedController extends Controller
 
         foreach($request->menuitem as $key => $value)
         {
-            $unclaimed = Unclaimed::where('id',$key)->where('customer_id',$customer->id)->first();
+            $unclaimed = Unclaimed::where('menu_item_id',$key)->where('customer_id',$customer->id)->first();
             $unclaimed->quantity = (int)$value;
             $unclaimed->save();
         }
         
         return back()->with('success', 'Quantity Updated Successfully');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function add_unclaimed(Request $request, Customer $customer)
+    {
+        // dd($customer);
+
+        foreach($request->menuitem as $key => $value)
+        {
+            // $output = $key;
+            // $output = $value;
+            // dd($output);
+
+            $id = $value['id'];
+            $quantity = $value['quantity'];
+
+            if(is_null($id) || is_null($quantity))
+                continue;
+
+            // dd($output);
+            $menuitem = MenuItem::find($id);
+
+            // dd($menuitem);
+
+            $unclaimed = Unclaimed::create([
+                'customer_id' => $customer->id,
+                'menu_item_id' => $menuitem->id,
+                'quantity' => $quantity,
+                'is_unclaimed' => true
+            ]);
+
+            $unclaimed->menuitems()->attach($menuitem);
+            $unclaimed->customers()->attach($customer);
+        }
+
+        // dd($customer);
+
+        return back()->with('success', 'Unclaimed Service Added Successfully');
     }
 
     /**

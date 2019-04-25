@@ -23,7 +23,7 @@
 {!! Form::open(['route' => ['unclaimed.updatequantity', 'customer' => $customer], 'class' => 'col s12', 'method' => 'POST']) !!}
 
 <div class="row">
-  <table>
+  <table id="quantity_tbl">
     <thead>
       <tr>
         <th>Service Name</th>
@@ -36,7 +36,7 @@
         <tr>
           <td>{{ $unclaimed->menuitems->first()->name }}</td>
           <td>
-            <input id="menuitem" name="menuitem[{{ $unclaimed->menuitems->first()->id }}]" type="text" value="{{ $unclaimed->quantity }}">
+            <input class="menuitem_qty" name="menuitem[{{ $unclaimed->menuitems->first()->id }}]" type="text" value="{{ $unclaimed->quantity }}">
           </td>
           <td>
             <a href="{{ route('unclaimed.removeunclaimed',['unclaimed' => $unclaimed, 'customer' => $customer]) }}" data-sedan-identifier='1' class='sedan_remove waves-effect waves-light btn'>X</a>
@@ -49,12 +49,12 @@
 
 </div>
 <div class="row">
-  <button type="submit" class="waves-effect waves-light btn-large">Save</button>
+  <button disabled id="quantity_btn" type="submit" class="waves-effect waves-light btn-large">Save</button>
 </div>
 
 {!! Form::close() !!}
 
-{!! Form::open(['route' => ['unclaimed.update', 'id' => $customer->id], 'class' => 'col s12', 'method' => 'PATCH']) !!}
+{!! Form::open(['route' => ['unclaimed.addunclaimed', 'customer' => $customer], 'class' => 'col s12', 'method' => 'POST']) !!}
 
 <div class="row">
   <table>
@@ -64,24 +64,24 @@
         <td colspan="3"><h4>Add Services</h4></td>
       </tr>
 
-      @foreach($services as $service)
+      @for($i = 0; $i < 3; $i++)
         <tr>
 
           <td>
             <div class="input-field col s12">
-              {{ Form::select("service_$service->id", $service_plucked, null, ['placeholder' => 'Select']) }}
+              {{ Form::select("menuitem[$i][id]", $service_plucked, null, ['placeholder' => 'Select']) }}
             </div>
           </td>
 
           <td colspan="2">
             <div class="input-field col s12">
-              <input id="quantity" name="quantity_{{ $service->id }}"  type="text" placeholder="Enter Quantity">
+              <input id="quantity" data-menuitem="menuitem[{{ $i }}]" name="menuitem[{{ $i }}][quantity]"  type="text" placeholder="Enter Quantity">
               <label for="quantity">Quantity</label>
             </div>
           </td>
 
         </tr>
-      @endforeach
+      @endfor
 
     </tbody>
   </table>

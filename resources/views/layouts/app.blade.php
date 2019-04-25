@@ -130,11 +130,24 @@
 
         content += "<a id='save_service' class='waves-effect waves-light btn'>Add</a></div>";
 
-        // $('.services').empty();
         $('.services').append(content);
         $('.car_type').formSelect();
       });
     });
+
+    $('#quantity_tbl .menuitem_qty').keyup(function() {
+
+      if($(this).val() == '')
+      {
+        $('#quantity_btn').prop('disabled',true);
+      }
+      else
+      {
+        $('#quantity_btn').prop('disabled',false);
+      }
+
+    });
+
   </script>
 
 </body>
