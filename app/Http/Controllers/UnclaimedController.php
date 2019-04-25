@@ -33,8 +33,8 @@ class UnclaimedController extends Controller
         }
         else
         {
-            // TODO: redirect to unclaimed services search result page
-            return view('sales.create');
+            // redirect to unclaimed search result page
+            return view('unclaimed.searchresult',compact('customer'));
         }
     }
 

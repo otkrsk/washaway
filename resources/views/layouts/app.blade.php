@@ -76,6 +76,7 @@
       $('.collapsible').collapsible();
       $('select').formSelect();
       $('.modal').modal();
+      $('.tabs').tabs();
 
       // Auto-populate Car Models in Customer creation form
       $('#brand_id').change(function() {

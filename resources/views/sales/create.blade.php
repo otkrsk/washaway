@@ -14,7 +14,7 @@
         <div class="row">
           <div class="input-field col s12">
             <input id="plate_no" name="plate_no" type="text" class="validate">
-            <label for="plate_no">Plate No.</label>
+            <label for="plate_no">wakaPlate No.</label>
           </div>
         </div>
 
