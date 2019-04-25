@@ -148,6 +148,55 @@
 
     });
 
+    $('#addservice_tbl .service_select').change(function() {
+      // console.log($(this).val());
+      
+      if($(this).val() == '' && $('.service_qty').val() == '')
+      {
+        // $('.service_qty').val('');
+        // console.log($('.service_qty').val());
+        $('#addservice_btn').prop('disabled',true);
+
+        // if($('.service_qty').val() == '')
+        // {
+        //   $('#addservice_btn').prop('disabled',true);
+        // }
+        // else
+        // {
+        //   $('.service_qty').prop('disabled',false);
+        //   $('#addservice_btn').prop('disabled',true);
+        // }
+      }
+      else
+      {
+        // $('#addservice_btn').prop('disabled',false);
+        $('.service_qty').prop('disabled',false);
+        $('#addservice_btn').prop('disabled',false);
+
+        // if($('.service_qty').val() == '')
+        // {
+        //   $('#addservice_btn').prop('disabled',true);
+        // }
+        // else
+        // {
+        //   $('.service_qty').prop('disabled',false);
+        //   $('#addservice_btn').prop('disabled',true);
+        // }
+
+        // $('.service_qty').keyup(function() {
+        //   if($(this).val() == '')
+        //   {
+        //     $('#addservice_btn').prop('disabled',true);
+        //   }
+        //   else
+        //   {
+        //     $('#addservice_btn').prop('disabled',false);
+        //   }
+        // });
+      }
+
+    });
+
   </script>
 
 </body>

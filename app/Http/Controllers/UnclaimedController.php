@@ -175,7 +175,7 @@ class UnclaimedController extends Controller
 
         foreach($customer_unclaimed as $unclaimed)
         {
-            $customer_unclaimed_ids[] = $unclaimed->id;
+            $customer_unclaimed_ids[] = $unclaimed->menu_item_id;
         }
 
         // dd($customer_unclaimed_ids);
@@ -184,6 +184,7 @@ class UnclaimedController extends Controller
             ->whereNotIn('id',$customer_unclaimed_ids)->get();
 
         $service_plucked = $services->pluck('name','id')->toArray();
+        // dd($service_plucked);
 
         return view('unclaimed.edit',compact('customer','services','service_plucked'));
     }
@@ -232,37 +233,51 @@ class UnclaimedController extends Controller
      */
     public function add_unclaimed(Request $request, Customer $customer)
     {
-        // dd($customer);
+        $error_msg = [];
 
         foreach($request->menuitem as $key => $value)
         {
-            // $output = $key;
-            // $output = $value;
-            // dd($output);
-
             $id = $value['id'];
             $quantity = $value['quantity'];
 
             if(is_null($id) || is_null($quantity))
                 continue;
 
-            // dd($output);
+            // we need to check if rel already exists
+            // FIXME: this is not working
             $menuitem = MenuItem::find($id);
 
-            // dd($menuitem);
+            $check_relationship = Unclaimed::whereHas('menuitems', function($q) use ($menuitem) {
+                $q->where('id',$menuitem->id);
+            })->where('customer_id',$customer->id)->get();
 
-            $unclaimed = Unclaimed::create([
-                'customer_id' => $customer->id,
-                'menu_item_id' => $menuitem->id,
-                'quantity' => $quantity,
-                'is_unclaimed' => true
-            ]);
+            if(count($check_relationship) > 0) {
+                $error_msg[] = $menuitem->name;
+            }
+            else
+            {
+                $unclaimed = Unclaimed::create([
+                    'customer_id' => $customer->id,
+                    'menu_item_id' => $menuitem->id,
+                    'quantity' => $quantity,
+                    'is_unclaimed' => true
+                ]);
 
-            $unclaimed->menuitems()->attach($menuitem);
-            $unclaimed->customers()->attach($customer);
+                $unclaimed->menuitems()->attach($menuitem);
+                $unclaimed->customers()->attach($customer);
+            }
         }
 
-        // dd($customer);
+        if(count($error_msg) > 0)
+        {
+            $message = "";
+            $last = end($error_msg);
+            foreach($error_msg as $em)
+            {
+                $message .= ($em == $last) ? $em . " " : $em . ", ";
+            }
+            return back()->with('error', "The Service(s) " . $message . " Has Already Been Added");
+        }
 
         return back()->with('success', 'Unclaimed Service Added Successfully');
     }

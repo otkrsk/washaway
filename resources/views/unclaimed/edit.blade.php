@@ -1,15 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<h3>Edit Member's Unclaimed Services</h3>
+<div class="row">
+  <h3>Edit Member's Unclaimed Services</h3>
+
+  @if($message = Session::get('success'))
+    <strong style="color:green;">{{ $message }}</strong>
+  @endif
+
+  @if($message = Session::get('error'))
+    <strong style="color:red;">{{ $message }}</strong>
+  @endif
+</div>
 
 <div class="row">
   <table>
     <tbody>
 
       <tr>
-        <td>{{ $customer->name }}</td>
-        <td colspan="2">{{ $customer->plate_no }}</td>
+        <td><h5>{{ $customer->name }}</h5></td>
+        <td colspan="2"><h5>{{ $customer->plate_no }}</h5></td>
       </tr>
 
       <tr>
@@ -57,7 +67,7 @@
 {!! Form::open(['route' => ['unclaimed.addunclaimed', 'customer' => $customer], 'class' => 'col s12', 'method' => 'POST']) !!}
 
 <div class="row">
-  <table>
+  <table id="addservice_tbl">
     <tbody>
 
       <tr>
@@ -69,13 +79,13 @@
 
           <td>
             <div class="input-field col s12">
-              {{ Form::select("menuitem[$i][id]", $service_plucked, null, ['placeholder' => 'Select']) }}
+              {{ Form::select("menuitem[$i][id]", $service_plucked, null, ['class' => 'service_select','placeholder' => 'Select']) }}
             </div>
           </td>
 
           <td colspan="2">
             <div class="input-field col s12">
-              <input id="quantity" data-menuitem="menuitem[{{ $i }}]" name="menuitem[{{ $i }}][quantity]"  type="text" placeholder="Enter Quantity">
+              <input class="service_qty" data-menuitem="menuitem[{{ $i }}]" name="menuitem[{{ $i }}][quantity]"  type="text" placeholder="Enter Quantity">
               <label for="quantity">Quantity</label>
             </div>
           </td>
@@ -88,7 +98,7 @@
 </div>
 
 <div class="row">
-  <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
+  <button disabled id="addservice_btn" type="submit" class="waves-effect waves-light btn-large">Submit</button>
 </div>
 
 
