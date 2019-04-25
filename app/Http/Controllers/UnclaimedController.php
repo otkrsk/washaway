@@ -34,7 +34,11 @@ class UnclaimedController extends Controller
 
         if(!$customer)
         {
-            return back()->with('error', 'No Membership Found');
+            if($search_type == 'member')
+                return back()->with('error_member_search', 'No Membership Found');
+
+            if($request->search_type == 'unclaimed')
+                return back()->with('error_unclaimed_search', 'No Membership Found');
         }
 
         $unclaimed = Unclaimed::where('customer_id',$customer->id)->get();
