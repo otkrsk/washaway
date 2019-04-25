@@ -171,22 +171,34 @@ class UnclaimedController extends Controller
     {
         $customer = Customer::find($id);
         $customer_unclaimed = $customer->unclaimed;
-        // dd($customer_unclaimed);
+        // dd(count($customer_unclaimed));
 
-        foreach($customer_unclaimed as $unclaimed)
+        if(count($customer_unclaimed) > 0)
         {
-            $customer_unclaimed_ids[] = $unclaimed->menu_item_id;
+            foreach($customer_unclaimed as $unclaimed)
+            {
+                $customer_unclaimed_ids[] = $unclaimed->menu_item_id;
+            }
+
+            // dd($customer_unclaimed_ids);
+
+            $services = MenuItem::where('product_type',1)
+                ->whereNotIn('id',$customer_unclaimed_ids)->get();
+
+            $service_plucked = $services->pluck('name','id')->toArray();
+            // dd($service_plucked);
+
+            return view('unclaimed.edit',compact('customer','services','service_plucked'));
         }
+        else
+        {
+            $services = MenuItem::where('product_type',1)->get();
 
-        // dd($customer_unclaimed_ids);
+            $service_plucked = $services->pluck('name','id')->toArray();
+            // dd($service_plucked);
 
-        $services = MenuItem::where('product_type',1)
-            ->whereNotIn('id',$customer_unclaimed_ids)->get();
-
-        $service_plucked = $services->pluck('name','id')->toArray();
-        // dd($service_plucked);
-
-        return view('unclaimed.edit',compact('customer','services','service_plucked'));
+            return view('unclaimed.edit',compact('customer','services','service_plucked'));
+        }
     }
 
     /**

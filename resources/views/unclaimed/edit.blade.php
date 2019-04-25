@@ -13,6 +13,7 @@
   @endif
 </div>
 
+@if(count($customer->unclaimed) > 0)
 <div class="row">
   <table>
     <tbody>
@@ -63,6 +64,7 @@
 </div>
 
 {!! Form::close() !!}
+@endif
 
 {!! Form::open(['route' => ['unclaimed.addunclaimed', 'customer' => $customer], 'class' => 'col s12', 'method' => 'POST']) !!}
 
