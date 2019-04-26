@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Membership;
+use App\MenuItem;
 use Illuminate\Http\Request;
 
 class MembershipController extends Controller
@@ -15,7 +16,7 @@ class MembershipController extends Controller
      */
     public function index()
     {
-        //
+        dd('wassup');
     }
 
     /**
@@ -33,17 +34,12 @@ class MembershipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function new(Customer $customer, MenuItem $menuItem)
+    public function new()
     {
-        dd($customer);
-        dd('Create New Sale');
+        $customer = Customer::find($_GET['customer']);
+        $membership = MenuItem::find($_GET['membership']);
 
-        $sale = Sale::create([
-            'user_id' => \Auth::user()->branches()->first()->id,
-            'customer_id' => $customer_id
-        ]);
-
-        $menuItem->sales()->attach($sale);
+        return view('members.new',compact('membership','customer'));
     }
 
     /**
@@ -54,7 +50,26 @@ class MembershipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $customer = Customer::find($request->customer);
+
+        if(is_null($request->name) || is_null($request->contact_no))
+        {
+            return back()->with('error', 'Name and/or Contact No cannot be blank.');
+        }
+
+        $contact_exists = $customer->where('contact_no', 'like', '%' . $request->contact_no . '%')->first();
+
+        if(count($contact_exists) > 0)
+        {
+            return back()->with('error', 'The phone number already exists. Please key in a different phone number.');
+        }
+
+        $customer->name = $request->name;
+        $customer->contact_no = $request->contact_no;
+
+        $customer->save();
+
+        return redirect()->action('SaleController@new', ['customer' => $customer, 'id' => $request->membership]);
     }
 
     /**

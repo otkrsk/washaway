@@ -125,8 +125,9 @@ class ServiceController extends Controller
 
     public function listMemberships(Customer $customer)
     {
-        $membership_type = ($customer->is_member) ? 3 : 2;
+        $membership_type = ($customer->is_member) ? 7 : 6;
         $memberships = MenuItem::where('product_type',$membership_type)->get();
+        // dd($memberships);
 
         return view('services.membership',compact('customer','memberships'));
     }

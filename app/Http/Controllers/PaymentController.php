@@ -124,6 +124,47 @@ class PaymentController extends Controller
         }
 
         /**
+         * 1. Check if Member Subscription is present
+         */
+
+        foreach($sale->menuitems as $menuitem)
+        {
+            if($menuitem->product_type == 6 || $menuitem->product_type == 7)
+            {
+                $customer = Customer::find($sale->customers->first()->id);
+
+                if($customer->membership)
+                {
+                    /**
+                     * 3. Convert the Customer to Member
+                     */
+                    $customer->is_member = true;
+                    $customer->save();
+                }
+                else
+                {
+                    /**
+                     * 2. Create the Membership object
+                     */
+
+                    $membership = Membership::create([                                                                                                                                                                                                           
+                        'customer_id' => $customer->id,
+                        'membership_type'=> $menuitem->membertype->first()->id,
+                        'membership_expires'=> MenuItem::get_membership_duration($menuitem),
+                        'is_expired' => false
+                    ]);
+
+                    /**
+                     * 3. Convert the Customer to Member
+                     */
+                    $customer->is_member = true;
+                    $customer->save();
+                }
+            }
+        }
+
+
+        /**
          * 1. Create Payment Object
          * 2. Generate Receipt No.
          * 3. Insert Paid Time
@@ -143,35 +184,6 @@ class PaymentController extends Controller
 
         $sale->status = 2;
         $sale->save();
-
-        /**
-         * 1. Check if Member Subscription is present
-         */
-
-        foreach($sale->menuitems as $menuitem)
-        {
-            if($menuitem->product_type == 2 || $menuitem->product_type == 3)
-            {
-                /**
-                 * 2. Create the Membership object
-                 */
-
-                $customer = Customer::find($sale->customers->first()->id);
-                $membership = Membership::create([                                                                                                                                                                                                           
-                    'customer_id' => $customer->id,
-                    'membership_type'=> $menuitem->membertype->first()->id,
-                    'membership_expires'=> MenuItem::get_membership_duration($menuitem),
-                    'is_expired' => false
-                ]);
-
-                /**
-                 * 3. Convert the Customer to Member
-                 */
-                $customer->is_member = true;
-                $customer->save();
-            }
-        }
-
 
         return redirect()->action('HomeController@index');
     }

@@ -68,7 +68,7 @@ Route::get('/sales/summary', 'SaleController@summary')->name('sales.summary');
 Route::get('/sales/transactions', 'SaleController@transactions')->name('sales.transactions');
 Route::resource('sales', 'SaleController');
 
-Route::get('/memberships/new/{customer}/{item}', 'MembershipController@new')->name('memberships.new');
+Route::get('/memberships/new', 'MembershipController@new')->name('memberships.new');
 Route::resource('memberships', 'MembershipController');
 
 Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');

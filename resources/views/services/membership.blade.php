@@ -17,7 +17,8 @@
       @foreach($memberships as $membership)
         <tr>
           <td>{{ $membership->name }}</td>
-          <td><a href='{{ route("sales.new", ["customer" => $customer->id, "item" => $membership->id]) }}' class='waves-effect waves-light btn'>Add</a></td>
+          <td><a href='{{ route("memberships.new", ["membership" => $membership, "customer" => $customer->id]) }}' class='waves-effect waves-light btn'>Add</a></td>
+          <!-- <td><a href='{{ route("memberships.create") }}' class='waves-effect waves-light btn'>Add</a></td> -->
         </tr>
       @endforeach
     </tbody>
