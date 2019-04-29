@@ -187,7 +187,6 @@ class UnclaimedController extends Controller
     {
         $customer = Customer::find($id);
         $customer_unclaimed = $customer->unclaimed;
-        // dd(count($customer_unclaimed));
 
         if(count($customer_unclaimed) > 0)
         {
@@ -196,13 +195,10 @@ class UnclaimedController extends Controller
                 $customer_unclaimed_ids[] = $unclaimed->menu_item_id;
             }
 
-            // dd($customer_unclaimed_ids);
-
             $services = MenuItem::where('product_type',1)
                 ->whereNotIn('id',$customer_unclaimed_ids)->get();
 
             $service_plucked = $services->pluck('name','id')->toArray();
-            // dd($service_plucked);
 
             return view('unclaimed.edit',compact('customer','services','service_plucked'));
         }
@@ -211,7 +207,6 @@ class UnclaimedController extends Controller
             $services = MenuItem::where('product_type',1)->get();
 
             $service_plucked = $services->pluck('name','id')->toArray();
-            // dd($service_plucked);
 
             return view('unclaimed.edit',compact('customer','services','service_plucked'));
         }

@@ -69,6 +69,7 @@ Route::get('/sales/transactions', 'SaleController@transactions')->name('sales.tr
 Route::resource('sales', 'SaleController');
 
 Route::get('/memberships/new', 'MembershipController@new')->name('memberships.new');
+Route::get('/memberships/add/{customer}/subcar', 'MembershipController@add_subcar')->name('memberships.addsubcar');
 Route::resource('memberships', 'MembershipController');
 
 Route::get('/branches/delete/{branch}', 'BranchController@delete')->name('branches.delete');
@@ -95,6 +96,9 @@ Route::get('/customers/{customer}/addservice/list/{sale?}', 'CustomerController@
 Route::get('/customers/{customer}/addservice', 'CustomerController@addservice_stub')->name('customers.addservice');
 Route::post('/customers/search', 'CustomerController@search_stub')->name('customers.search');
 Route::resource('customers', 'CustomerController');
+
+Route::post('/customers/add/subcar', 'CustomercarController@create_subcar')->name('customers.createsubcar');
+Route::resource('customers', 'CustomercarController');
 
 Route::get('/unclaimed/{customer}/list', 'UnclaimedController@list')->name('unclaimed.list');
 Route::post('/unclaimed/{customer}/add', 'UnclaimedController@add')->name('unclaimed.add');

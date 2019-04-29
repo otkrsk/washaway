@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Carcolor;
+use App\Carmodel;
+use App\Customer;
 use App\Customercar;
+
 use Illuminate\Http\Request;
 
 class CustomercarController extends Controller
@@ -25,6 +29,60 @@ class CustomercarController extends Controller
     public function create()
     {
         //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_subcar(Request $request)
+    {
+        // dd($request->request);
+
+        // 1. Check if plate no exists
+        $check = Customercar::plate_no_exists($request->plate_no);
+
+        if($check)
+        {
+            return back()->with('plate_no_error', 'Plate Number is already attached to Member');
+        }
+
+        if(is_null($request->plate_no))
+        {
+            return back()->with('plate_no_error', 'Plate Number cannot be empty');
+        }
+
+        if(!isset($request->brand_id))
+        {
+            return back()->with('brand_error', 'Please select choose a Brand');
+        }
+
+        if(!isset($request->model_id))
+        {
+            return back()->with('model_error', 'Please select choose a Model');
+        }
+
+        if(!isset($request->color_id))
+        {
+            return back()->with('color_error', 'Please select choose a Color');
+        }
+
+        $customer = Customer::find($request->customer_id);
+        $car_model = Carmodel::find($request->model_id);
+
+        $subcar = Customercar::create([
+            'customer_id' => $request->customer_id,
+            'plate_no' => $request->plate_no,
+            'brand' => $request->brand_id,
+            'model' => $request->model_id,
+            'color' => $request->color_id,
+            'type' => $car_model->type,
+            'is_subcar' => true
+        ]);
+        
+        return redirect()->action('ServiceController@listMemberships', ['customer' => $customer]);
+
     }
 
     /**

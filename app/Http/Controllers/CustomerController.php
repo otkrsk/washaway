@@ -38,7 +38,9 @@ class CustomerController extends Controller
         $brands = Carbrand::get();
         $models = Carmodel::get();
         $colors = Carcolor::get();
-        return view('customers.create',compact('brands','colors','models','plate_no'));
+
+        $route = 'customers.create';
+        return view('customers.create',compact('route','brands','colors','models','plate_no'));
     }
 
     /**

@@ -21,6 +21,10 @@
           <!-- <td><a href='{{ route("memberships.create") }}' class='waves-effect waves-light btn'>Add</a></td> -->
         </tr>
       @endforeach
+      <tr>
+        <td>Add Sub Car</td>
+          <td><a href='{{ route("memberships.addsubcar", ["customer" => $customer->id]) }}' class='waves-effect waves-light btn'>Add</a></td>
+      </tr>
     </tbody>
   </table>
 </div>

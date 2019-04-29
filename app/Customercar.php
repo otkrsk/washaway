@@ -12,7 +12,8 @@ class Customercar extends Model
         'brand',
         'model',
         'color',
-        'type'
+        'type',
+        'is_subcar'
     ];
 
     public function customers()
@@ -38,5 +39,17 @@ class Customercar extends Model
     public function sales()
     {
         return $this->hasMany(Sale::class);
+    }
+
+    public static function plate_no_exists($plate_no)
+    {
+        $plate_no_exists = Customercar::where('plate_no', 'like', '%' . $plate_no . '%')->first();
+
+        if(count($plate_no_exists) > 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

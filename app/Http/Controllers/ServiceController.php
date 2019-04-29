@@ -127,7 +127,6 @@ class ServiceController extends Controller
     {
         $membership_type = ($customer->is_member) ? 7 : 6;
         $memberships = MenuItem::where('product_type',$membership_type)->get();
-        // dd($memberships);
 
         return view('services.membership',compact('customer','memberships'));
     }

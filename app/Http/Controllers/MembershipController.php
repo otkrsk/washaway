@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Carbrand;
+use App\Carcolor;
+use App\Carmodel;
 use App\Customer;
 use App\Membership;
 use App\MenuItem;
@@ -83,6 +86,31 @@ class MembershipController extends Controller
         $member = Customer::find($customer);
         // dd($member);
         return view('members.show',compact('member'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Membership  $membership
+     * @return \Illuminate\Http\Response
+     */
+    public function add_subcar(Customer $customer)
+    {
+        $plate_no = null;
+        $brands = Carbrand::get();
+        $models = Carmodel::get();
+        $colors = Carcolor::get();
+
+        $route = 'customers.createsubcar';
+
+        return view('customers.create',compact(
+            'customer',
+            'route',
+            'plate_no',
+            'brands',
+            'models',
+            'colors'
+        ));
     }
 
     /**
