@@ -15,7 +15,7 @@
     <table>
       <tbody>
         <tr>
-          <td>Plate No:</td><td><a href="#">{{ $member->cars->first()->plate_no }}</a></td>
+          <td>Plate No:</td><td><a href="{{ route('memberships.cartransactions',['car' => $member->cars->first()]) }}">{{ $member->cars->first()->plate_no }}</a></td>
         </tr>
         <tr>
           <td>Make & Model:</td><td>{{ $member->cars->first()->brand()->first()->name }} {{ $member->cars->first()->model()->first()->name }}</td>
@@ -33,7 +33,7 @@
       <table>
         <tbody>
           <tr>
-            <td>Plate No:</td><td><a href="#">{{ $subcar->plate_no }}</a></td>
+            <td>Plate No:</td><td><a href="{{ route('memberships.cartransactions',['car' => $subcar]) }}">{{ $subcar->plate_no }}</a></td>
           </tr>
           <tr>
             <td>Make & Model:</td><td>{{ $subcar->brand()->first()->name }} {{ $subcar->model()->first()->name }}</td>

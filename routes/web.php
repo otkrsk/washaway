@@ -68,6 +68,7 @@ Route::get('/sales/summary', 'SaleController@summary')->name('sales.summary');
 Route::get('/sales/transactions', 'SaleController@transactions')->name('sales.transactions');
 Route::resource('sales', 'SaleController');
 
+Route::get('/memberships/car/{car}/transactions', 'MembershipController@car_transactions')->name('memberships.cartransactions');
 Route::get('/memberships/new', 'MembershipController@new')->name('memberships.new');
 Route::get('/memberships/add/{customer}/subcar', 'MembershipController@add_subcar')->name('memberships.addsubcar');
 Route::resource('memberships', 'MembershipController');

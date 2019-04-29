@@ -93,6 +93,23 @@ class MembershipController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Membership  $membership
+     * @return \Illuminate\Http\Response
+     */
+    public function car_transactions($customer)
+    {
+        // $member = Customer::find($customer);
+        // $member_subcars = $member->cars->where('is_subcar',true);
+        // $i = 1;
+
+
+        // return view('members.cartransactions',compact('member','member_subcars','i'));
+        return view('members.cartransactions');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Membership  $membership
