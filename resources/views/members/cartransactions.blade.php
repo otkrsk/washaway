@@ -18,7 +18,7 @@
         <tr>
           <th>Date</th>
           <th>Service</th>
-          <th>Amount</th>
+          <th colspan="2">Amount</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +26,7 @@
           <td>28 May 2019</td>
           <td>Cook Wax</td>
           <td>RM200</td>
+          <td><a href="#" class='waves-effect waves-light btn'>View</a></td>
         </tr>
       </tbody>
     </table>

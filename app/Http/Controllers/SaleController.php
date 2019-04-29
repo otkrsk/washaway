@@ -36,8 +36,6 @@ class SaleController extends Controller
         $total_pending = count(Sale::where('created_at','>',date('Y-m-d') . ' 00:00:00')->where('is_cancel',false)->where('status',1)->get());
         $total_paid = count(Sale::where('created_at','>',date('Y-m-d') . ' 00:00:00')->where('is_cancel',false)->where('status',2)->get());
 
-        // $total_sales = Sale::where('is_cancel',false)->where('status',2)->get();
-
         $sum = 0;
         
         foreach($sales as $sale)
