@@ -27,4 +27,23 @@
     </table>
   </div>
 
+  @foreach($member_subcars as $subcar)
+    <div class="row">
+      <h4>Sub Car #{{ $i++ }}</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td>Plate No:</td><td><a href="#">{{ $subcar->plate_no }}</a></td>
+          </tr>
+          <tr>
+            <td>Make & Model:</td><td>{{ $subcar->brand()->first()->name }} {{ $subcar->model()->first()->name }}</td>
+          </tr>
+          <tr>
+            <td>Colour:</td><td>{{ $subcar->color()->first()->name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  @endforeach
+
 @endsection

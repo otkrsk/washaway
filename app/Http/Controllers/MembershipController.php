@@ -84,8 +84,12 @@ class MembershipController extends Controller
     public function show($customer)
     {
         $member = Customer::find($customer);
-        // dd($member);
-        return view('members.show',compact('member'));
+        $member_subcars = $member->cars->where('is_subcar',true);
+        $i = 1;
+
+        // dd($member_subcars);
+
+        return view('members.show',compact('member','member_subcars','i'));
     }
 
     /**
