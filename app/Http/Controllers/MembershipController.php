@@ -101,7 +101,7 @@ class MembershipController extends Controller
         $models = Carmodel::get();
         $colors = Carcolor::get();
 
-        $route = 'customers.createsubcar';
+        $route = 'customercars.createsubcar';
 
         return view('customers.create',compact(
             'customer',
