@@ -97,7 +97,7 @@ Route::get('/customers/{customer}/addservice', 'CustomerController@addservice_st
 Route::post('/customers/search', 'CustomerController@search_stub')->name('customers.search');
 Route::resource('customers', 'CustomerController');
 
-Route::post('/customers/add/subcar', 'CustomercarController@create_subcar')->name('customercar.createsubcar');
+Route::post('/customers/add/subcar', 'CustomercarController@create_subcar')->name('customercars.createsubcar');
 Route::resource('customercars', 'CustomercarController');
 
 Route::get('/unclaimed/{customer}/list', 'UnclaimedController@list')->name('unclaimed.list');
