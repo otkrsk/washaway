@@ -96,21 +96,31 @@ class MembershipController extends Controller
      */
     public function add_subcar(Customer $customer)
     {
-        $plate_no = null;
-        $brands = Carbrand::get();
-        $models = Carmodel::get();
-        $colors = Carcolor::get();
+        $customercars = $customer->cars;
 
-        $route = 'customercars.createsubcar';
+        if(count($customercars) < 3)
+        {
+            $plate_no = null;
+            $brands = Carbrand::get();
+            $models = Carmodel::get();
+            $colors = Carcolor::get();
 
-        return view('customers.create',compact(
-            'customer',
-            'route',
-            'plate_no',
-            'brands',
-            'models',
-            'colors'
-        ));
+            $route = 'customercars.createsubcar';
+
+            return view('customers.create',compact(
+                'customer',
+                'route',
+                'plate_no',
+                'brands',
+                'models',
+                'colors'
+            ));
+        }
+        else
+        {
+            return back()->with('error', 'Member already has maximum number of Sub Cars');
+        }
+
     }
 
     /**
