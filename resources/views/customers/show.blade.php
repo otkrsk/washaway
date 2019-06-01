@@ -8,7 +8,7 @@
   <h4>Member Status: {{ ($customer->is_member) ? "Member" : "Walk-In" }}</h4>
   <h4 style="visibility:hidden;">Remaining Unclaimed Services (TBD)</h3>
 
-  <a class='waves-effect waves-light btn'>Cancel</a>
+  <a  href='{{ route("home") }}' class='waves-effect waves-light btn'>Cancel</a>
   <a href='{{ route("customers.addservice", ["id" => $customer->id]) }}' class='waves-effect waves-light btn'>Confirm</a>
 
 @endsection

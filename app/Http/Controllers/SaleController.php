@@ -99,6 +99,8 @@ class SaleController extends Controller
     public function new(Customer $customer, $id, $flag = null)
     {
         $menuItem = MenuItem::findOrFail($id);
+        // dd($menuItem);
+        // dd($flag);
 
         if($flag)
         {
@@ -107,6 +109,8 @@ class SaleController extends Controller
                 ->where('status',1)
                 ->where('is_cancel',false)
                 ->first();
+
+            dd($sale);
         }
         else
         {

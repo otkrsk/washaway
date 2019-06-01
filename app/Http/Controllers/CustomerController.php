@@ -92,6 +92,8 @@ class CustomerController extends Controller
             ->where('is_cancel', false)
             ->first();
 
+        // dd($sale);
+
         if($sale)
         {
             $sum = 0;
@@ -128,6 +130,12 @@ class CustomerController extends Controller
     public function search_stub(Request $request)
     {
         // dd($request->request);
+
+        if($request->plate_no == '')
+        {
+            return back()->with('plate_no_error', 'Please insert search query');
+        }
+
         $customer_car = Customercar::where('plate_no','like',$request->plate_no)->first();
 
         if(count($customer_car) > 0)
